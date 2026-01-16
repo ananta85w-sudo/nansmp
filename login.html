@@ -166,27 +166,41 @@ const playerNameInput = document.getElementById('player-name');
 const loginBtn = document.getElementById('login-btn');
 
 const urlParams = new URLSearchParams(window.location.search);
-const redirectPage = urlParams.get('to') || 'rank';
+let redirectPage = urlParams.get('to') || 'rank';
+let prefilledPlayer = urlParams.get('player');
 
-function updateDot() {
-    if(platformSelect.value === 'bedrock'){
+// Jika sudah ada player di URL, redirect otomatis
+if(prefilledPlayer){
+    let displayName = prefilledPlayer;
+    // Bedrock cek titik
+    if(displayName.startsWith('. ') || displayName.startsWith('.')) {
+        platformSelect.value = 'bedrock';
         dot.style.display = 'inline-block';
     } else {
+        platformSelect.value = 'java';
         dot.style.display = 'none';
     }
+    // Redirect otomatis
+    window.location.href = (redirectPage.toLowerCase() === 'money' ? 'money.html' :
+                            redirectPage.toLowerCase() === 'skills' ? 'skills.html' :
+                            'rank.html') + '?player=' + encodeURIComponent(displayName);
+}
+
+// Update dot jika platform Bedrock
+function updateDot() {
+    dot.style.display = (platformSelect.value === 'bedrock') ? 'inline-block' : 'none';
 }
 platformSelect.addEventListener('change', updateDot);
 updateDot();
 
+// Tombol login
 loginBtn.addEventListener('click', () => {
     let name = playerNameInput.value.trim();
-    const platform = platformSelect.value;
     if(name === ''){
         alert('Masukkan nama Minecraft!');
         return;
     }
-    // Titik untuk Bedrock + spasi
-    let displayName = (platform==='bedrock') ? '. ' + name : name;
+    let displayName = (platformSelect.value === 'bedrock') ? '. ' + name : name;
 
     switch(redirectPage.toLowerCase()){
         case 'money':
