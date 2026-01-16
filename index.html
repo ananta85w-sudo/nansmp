@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NanSMP | Minecraft Server</title>
+<link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
+body{background:url('https://i.imgur.com/ZskENbp.jpeg') center/cover no-repeat fixed;min-height:100vh;color:#fff}
+body::before{content:'';position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);z-index:-1}
+.container{max-width:420px;margin:auto;padding:20px}
+.logo{text-align:center;margin-top:30px}
+.logo img{width:110px;border-radius:16px;margin-bottom:10px}
+.title{font-size:30px;text-align:center;font-family:'Minecraft',monospace !important}
+.title .nan{color:#00bfff}
+.title .smp{color:#ffffff}
+.status{text-align:center;margin:10px 0;color:#ff4444;font-weight:bold}
+.card{background:rgba(0,0,0,.65);border-radius:16px;padding:15px;margin:15px 0}
+.card h3{margin-bottom:8px;font-family:'Minecraft',monospace;font-size:16px;font-weight:normal}
+.ip-row{display:flex;justify-content:space-between;align-items:center;background:#111;padding:10px;border-radius:10px;margin-top:6px}
+.ip-row span{font-size:13px}
+.copy{cursor:pointer}
+.btn{display:block;text-align:center;padding:12px 18px;border-radius:14px;margin:10px auto;font-weight:bold;text-decoration:none;color:#fff;width:80%}
+.btn-add{background:linear-gradient(135deg,#00c6ff,#0072ff);box-shadow:0 6px 16px rgba(0,114,255,.45)}
+.btn-store{background:linear-gradient(135deg,#ffb347,#ff9800);box-shadow:0 6px 16px rgba(255,152,0,.45)}
+.btn-social{display:inline-block;text-align:center;padding:12px 18px;border-radius:14px;margin:8px;font-weight:bold;text-decoration:none;color:#fff;min-width:140px;box-shadow:0 6px 16px rgba(0,0,0,.45);}
+.btn-buy{display:block;text-align:center;padding:12px 18px;border-radius:14px;margin:6px auto;font-weight:bold;text-decoration:none;color:#fff;width:70%}
+.btn-buy.rank{background:linear-gradient(135deg,#ff4b2b,#ff416c)}
+.btn-buy.money{background:linear-gradient(135deg,#00ff00,#008000)}
+.btn-buy.skills{background:linear-gradient(135deg,#ffd700,#ffa500)}
+.section{margin-top:40px}
+.section h2{text-align:center;margin-bottom:15px;font-family:'Minecraft',monospace}
+ul{list-style:none}
+ul li{margin:8px 0;font-size:15px;display:flex;align-items:flex-start}
+ul li span{margin-right:8px}
+.nav{position:fixed;top:15px;right:15px}
+.nav details summary{font-size:24px;cursor:pointer}
+.nav a{display:block;color:#fff;text-decoration:none;margin:8px 0;padding:8px 12px;border-radius:10px;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.25)}
+.fitur, .peraturan{text-align:center;margin:20px auto;max-width:380px;background:rgba(0,0,0,.6);padding:15px;border-radius:16px;box-shadow:0 8px 20px rgba(0,0,0,.4)}
+.fitur ul li, .peraturan ul li{background:rgba(255,255,255,.05);padding:8px 10px;border-radius:8px;margin:6px 0}
+.fitur ul li:hover, .peraturan ul li:hover{background:rgba(255,255,255,.15);}
+footer{margin-top:40px;text-align:center;color:#fff;font-size:14px;line-height:1.5}
+footer a{color:#00bfff;text-decoration:underline}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="nav">
+<details>
+<summary>☰</summary>
+<a href="#home">🏠 Home</a>
+<a href="https://whatsapp.com/channel/0029VaqnH97L7UVWBeMAyX2I">📱 WhatsApp</a>
+<a href="https://discord.gg/4KPhCnvQyf">💬 Discord</a>
+<a href="#store">🛒 Store</a>
+<a href="#vote">🗳️ Vote</a>
+<a href="syarat-ketentuan.html">📄 Syarat & Ketentuan</a>
+</details>
+</div>
+
+<div class="container" id="home">
+  <div class="logo">
+    <img src="https://i.imgur.com/qtjIm0q.jpeg" alt="NanSMP Logo">
+    <div class="title">
+      <span class="nan">NAN</span><span class="smp">SMP</span>
+      <span style="color:#9e9e9e"> | </span>
+      <span>MINECRAFT SERVER</span>
+    </div>
+  </div>
+
+  <div class="status">OFFLINE</div>
+
+  <div class="card">
+    <h3>BEDROCK 🗿</h3>
+    <div class="ip-row"><span>IP / Address</span><span class="copy">nansmp.net 📋</span></div>
+    <div class="ip-row"><span>Port</span><span class="copy">19132 📋</span></div>
+  </div>
+
+  <div class="card">
+    <h3>JAVA ☁</h3>
+    <div class="ip-row"><span>IP / Address</span><span class="copy">nansmp.net 📋</span></div>
+  </div>
+</div>
+
+<!-- Tombol ADD SERVER & STORE -->
+<a class="btn btn-add" href="#">🎮 ADD SERVER</a>
+<a class="btn btn-store" href="#store">🛒 STORE</a>
+
+<!-- Socials -->
+<h2 style="font-family:'Minecraft',monospace;text-align:center;margin-top:30px">🌐 SOCIALS</h2>
+<div style="text-align:center;">
+  <a class="btn btn-social" style="background:linear-gradient(135deg,#25D366,#128C7E)" href="https://whatsapp.com/channel/0029VaqnH97L7UVWBeMAyX2I">📱 WhatsApp</a>
+  <a class="btn btn-social" style="background:linear-gradient(135deg,#5865F2,#404EED)" href="https://discord.gg/4KPhCnvQyf">💬 Discord</a>
+  <a class="btn btn-social" style="background:linear-gradient(135deg,#ff512f,#f09819)" href="#">🗳️ Vote Server</a>
+</div>
+
+<!-- Fitur server -->
+<div class="fitur">
+<h3 style="font-family:'Minecraft',monospace">FITUR SERVER NANSMP</h3>
+<ul>
+<li><span>🎯</span>Survival - Bertahan hidup dan membangun dunia kamu</li>
+<li><span>🎰</span>Gacha - Dapatkan item menarik setiap hari</li>
+<li><span>⚔️</span>PvP Area - Bertarung dengan player lain</li>
+<li><span>🏝️</span>AFK Area - Tempat aman untuk AFK</li>
+<li><span>🏦</span>Auction House - Jual beli item antar player</li>
+<li><span>🎁</span>Kits - Dapatkan perlengkapan setiap hari</li>
+<li><span>🛒</span>Shop - Membeli item dan blok</li>
+<li><span>💎</span>Rank - Upgrade rank server kamu</li>
+<li><span>💰</span>Money - Tambah saldo kamu</li>
+<li><span>🗺️</span>Claim Land - Klaim area milikmu</li>
+<li><span>🛡️</span>Skills - Tingkatkan kemampuan player</li>
+<li><span>🌐</span>Support Java & Bedrock</li>
+</ul>
+</div>
+
+<!-- Peraturan server -->
+<div class="peraturan">
+<h3 style="font-family:'Minecraft',monospace">PERATURAN ⚠</h3>
+<ul>
+<li><span>❌</span>NO PROMOSI / SPAM</li>
+<li><span>🔞</span>NO 18+</li>
+<li><span>💢</span>NO TOXIC BERLEBIHAN</li>
+<li><span>🚫</span>NO BULLYING</li>
+<li><span>🛑</span>NO CHEAT / RUSUH</li>
+<li><span>⚠️</span>NO PROVOKASI</li>
+<li><span>🧠</span>JAGA NAMA BAIK SERVER</li>
+<li><span>🫱</span>GUNAKAN AKAL SEHAT</li>
+<li><span>🤝</span>SOPAN</li>
+<li><span>🙏</span>NO MENGHINA AGAMA</li>
+<li><span>❗</span>Melanggar? Ban/banip/kick</li>
+</ul>
+<p>NanSMP adalah server minecraft INDONESIA yang bertemakan ECONOMY!</p>
+</div>
+
+<!-- NANSMP STORE -->
+<div class="section" id="store">
+<h2 style="font-family:'Minecraft',monospace;text-align:center">🛒 NANSMP STORE</h2>
+
+<!-- Tombol beli langsung ke login sesuai jenis -->
+<a class="btn btn-buy rank" href="login.html?to=rank">💎 Beli Rank</a>
+<a class="btn btn-buy money" href="login.html?to=money">💰 Beli Money</a>
+<a class="btn btn-buy skills" href="login.html?to=skills">🛡️ Beli Skills</a>
+</div>
+
+<!-- Footer -->
+<footer>
+  <p>© NanSMP, All rights reserved</p>
+  <p>
+    <a href="syarat-ketentuan.html">Syarat & Ketentuan</a> |
+    <a href="https://discord.gg/4KPhCnvQyf">Discord</a> |
+    <a href="https://whatsapp.com/channel/0029VaqnH97L7UVWBeMAyX2I">WhatsApp</a>
+  </p>
+  <p><a href="https://store.nansmp.net" target="_blank">store.nansmp.net</a></p>
+  <p style="color:#ccc;font-size:12px;margin-top:6px;">
+    NanSMP tidak berafiliasi dengan Mojang Studios atau Microsoft.
+  </p>
+</footer>
+
+</body>
+                                                                   </html>
