@@ -136,7 +136,7 @@ NanSMP tidak berafiliasi dengan Mojang Studios atau Microsoft.
 </footer>
 
 <script>
-// Ambil nama player dari URL (misal ?player=Farhan)
+// Ambil nama player dari URL
 const urlParams = new URLSearchParams(window.location.search);
 const playerName = urlParams.get('player') || 'Player123';
 document.getElementById('player-name').textContent = playerName;
@@ -145,12 +145,12 @@ document.getElementById('player-name').textContent = playerName;
 const rupiahInput = document.getElementById('rupiah-input');
 const moneyResult = document.getElementById('money-result');
 
-// Contoh konversi: 1 RP = 60 Money server
+// Konversi: 1 RP = 60 Money server
 function calcMoney(rp){
     return rp * 60;
 }
 
-// Fungsi format Money (k,m,b,t)
+// Format Money: k, m, b, t
 function formatMoney(money){
     if(money >= 1_000_000_000_000){
         let t = money/1_000_000_000_000;
@@ -167,7 +167,7 @@ function formatMoney(money){
     }
 }
 
-// Event input
+// Update Money Result
 rupiahInput.addEventListener('input', () => {
     let rp = parseFloat(rupiahInput.value);
     if(isNaN(rp) || rp <= 0){
@@ -178,36 +178,42 @@ rupiahInput.addEventListener('input', () => {
     moneyResult.innerHTML = 'Total Money: <span style="color:#00ff00">' + formatMoney(money) + '</span>';
 });
 
-// Tombol beli → WhatsApp
+// Dapatkan tanggal & jam sesuai WIB/WITA/WIT
+function getTimezones(){
+    const now = new Date();
+    const pad = n => n.toString().padStart(2,'0');
+    const date = `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()}, ${["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"][now.getDay()]}`;
+    
+    // WIB
+    const wib = new Date(now.getTime() + (7-now.getTimezoneOffset()/60)*3600*1000);
+    const wita = new Date(now.getTime() + (8-now.getTimezoneOffset()/60)*3600*1000);
+    const wit = new Date(now.getTime() + (9-now.getTimezoneOffset()/60)*3600*1000);
+
+    const format = d => pad(d.getHours())+':'+pad(d.getMinutes());
+
+    return `WIB: ${format(wib)}, WITA: ${format(wita)}, WIT: ${format(wit)}`;
+}
+
+// Tombol beli ke WhatsApp
 document.getElementById('buy-btn').addEventListener('click', () => {
     let rp = parseFloat(rupiahInput.value);
-    if(isNaN(rp) || rp <= 0){
+    if(isNaN(rp) || rp <=0){
         alert('Masukkan jumlah Rupiah!');
         return;
     }
     let money = calcMoney(rp);
+    let harga = rp;
 
-    // Ambil waktu saat ini
-    let now = new Date();
-    const pad = n => n.toString().padStart(2,'0');
-    let hours = now.getHours();
-    let minutes = pad(now.getMinutes());
-
-    let wib = `${pad(hours)}:${minutes} WIB`;
-    let wita = `${pad((hours+1)%24)}:${minutes} WITA`;
-    let wit = `${pad((hours+2)%24)}:${minutes} WIT`;
-
-    // Format pesan WhatsApp
-    let message = 
-`---------------TOPUP MONEY-----------------
+    const text = `---------------TOPUP MONEY-----------------
 Nama Minecraft: ${playerName}
-Tanggal/Tahun: ${wib}, ${wita}, ${wit}
+Tanggal/Tahun: ${getTimezones()}
 Jumlah money: ${money}
-Harga: Rp. ${rp}
+Harga: Rp. ${harga}
 --------------------------------------------------------`;
 
-    let waURL = 'https://wa.me/62881038098059?text=' + encodeURIComponent(message);
-    window.open(waURL, '_blank');
+    // Encode text untuk WhatsApp
+    const waLink = 'https://wa.me/628781111111?text=' + encodeURIComponent(text);
+    window.open(waLink,'_blank');
 });
 </script>
 
