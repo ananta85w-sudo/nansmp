@@ -25,9 +25,11 @@ footer a:hover{text-decoration:underline}
 </style>
 </head>
 <body>
+
 <main>
 <div class="login-box">
 <h2>🔑 MASUK</h2>
+
 <div class="input-group">
 <select id="platform">
 <option value="java">JAVA</option>
@@ -36,12 +38,15 @@ footer a:hover{text-decoration:underline}
 <span class="dot" id="dot">.</span>
 <input type="text" id="player-name" placeholder="Nama Minecraft">
 </div>
+
 <p class="notice">
 Dengan login, anda menyetujui <a href="syarat-ketentuan.html">Syarat dan Ketentuan</a>.
 </p>
+
 <button id="login-btn">Log In</button>
 </div>
 </main>
+
 <footer>
 <p>© NanSMP, All rights reserved</p>
 <p>
@@ -59,41 +64,46 @@ const dot = document.getElementById('dot');
 const playerNameInput = document.getElementById('player-name');
 const loginBtn = document.getElementById('login-btn');
 
-// Ambil parameter redirect dari URL
-let urlParams = new URLSearchParams(window.location.search);
+// Ambil parameter 'to' dari URL (rank/money/skills)
+const urlParams = new URLSearchParams(window.location.search);
 let redirectPage = urlParams.get('to') || 'rank';
 
-// Jika localStorage ada player dan redirect sebelumnya
+// Jika ada player tersimpan, tampilkan
 if(localStorage.getItem('player')) playerNameInput.value = localStorage.getItem('player');
-if(localStorage.getItem('redirect')) redirectPage = localStorage.getItem('redirect');
 
+// Fungsi tampilkan titik untuk Bedrock
 function updateDot(){
     dot.style.display = (platformSelect.value==='bedrock') ? 'inline-block' : 'none';
 }
 platformSelect.addEventListener('change', updateDot);
 updateDot();
 
+// Tombol login
 loginBtn.addEventListener('click', ()=>{
-    let name = playerNameInput.value.trim();
+    const name = playerNameInput.value.trim();
     if(!name){ alert('Masukkan nama Minecraft!'); return; }
-    let displayName = (platformSelect.value==='bedrock') ? '. ' + name : name;
-    
-    // Simpan player & redirect
-    localStorage.setItem('player', displayName);
-    localStorage.setItem('redirect', redirectPage);
 
-    // Redirect sesuai to
+    // Tambahkan titik + spasi untuk Bedrock
+    const displayName = (platformSelect.value==='bedrock') ? '. ' + name : name;
+
+    // Simpan nama player di localStorage agar tetap ada
+    localStorage.setItem('player', displayName);
+
+    // Redirect ke halaman sesuai parameter 'to'
+    let targetUrl = '';
     switch(redirectPage.toLowerCase()){
         case 'money':
-            window.location.href='money.html?player='+encodeURIComponent(displayName);
+            targetUrl = 'money.html?player=' + encodeURIComponent(displayName);
             break;
         case 'skills':
-            window.location.href='skills.html?player='+encodeURIComponent(displayName);
+            targetUrl = 'skills.html?player=' + encodeURIComponent(displayName);
             break;
         default:
-            window.location.href='rank.html?player='+encodeURIComponent(displayName);
+            targetUrl = 'rank.html?player=' + encodeURIComponent(displayName);
     }
+    window.location.href = targetUrl;
 });
 </script>
+
 </body>
 </html>
