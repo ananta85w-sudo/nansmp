@@ -86,7 +86,7 @@ footer a:hover{text-decoration:underline;}
   <div class="card">
     <h3>BEDROCK 🗿</h3>
     <div class="ip-row"><span>IP / Address</span><span class="copy">nansmp.net 📋</span></div>
-    <div class="ip-row"><span>Port</span><span class="copy">maintenance 📋</span></div>
+    <div class="ip-row"><span>Port</span><span class="copy">12234 📋</span></div>
   </div>
 
   <div class="card">
@@ -119,7 +119,7 @@ footer a:hover{text-decoration:underline;}
 <li><span>🎁</span>Kits - Dapatkan perlengkapan setiap hari</li>
 <li><span>🛒</span>Shop - Membeli item dan blok</li>
 <li><span>💎</span>Rank - Upgrade rank server kamu</li>
-<li><span>💰</span>Money - Tambah saldo kamu</li>
+<li><span>💰</span>Money - Untuk menjual beli item</li>
 <li><span>🗺️</span>Claim Land - Klaim area milikmu</li>
 <li><span>🛡️</span>Skills - Tingkatkan kemampuan player</li>
 <li><span>🌐</span>Support Java & Bedrock</li>
@@ -196,7 +196,31 @@ document.querySelectorAll('.copy').forEach(el => {
         });
     });
 });
+
+// --- SERVER STATUS BEDROCK PORT 12234 ---
+async function updateServerStatus(){
+    const statusEl = document.querySelector('.status');
+    try {
+        const res = await fetch('https://api.mcsrvstat.us/bedrock/nansmp.net:12234');
+        const data = await res.json();
+        if(data.online){
+            const online = data.players?.online || 0;
+            const max = data.players?.max || '?';
+            statusEl.textContent = `ONLINE ${online} / ${max} Player`;
+            statusEl.style.color = '#00ff00';
+        } else {
+            statusEl.textContent = 'OFFLINE';
+            statusEl.style.color = '#ff4444';
+        }
+    } catch(err){
+        statusEl.textContent = 'OFFLINE';
+        statusEl.style.color = '#ff4444';
+        console.error(err);
+    }
+}
+updateServerStatus();
+setInterval(updateServerStatus,15000);
 </script>
 
 </body>
-</html>
+  </html>
