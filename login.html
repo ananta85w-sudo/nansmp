@@ -74,7 +74,7 @@ main {
     font-size:18px;
 }
 .input-group input {
-    padding:10px 10px 10px 20px; /* padding kiri agak lebih untuk spasi titik */
+    padding:10px 10px 10px 25px; /* space for dot */
     border-radius:0 10px 10px 0;
     border:none;
     flex:1;
@@ -185,7 +185,7 @@ loginBtn.addEventListener('click', () => {
         alert('Masukkan nama Minecraft!');
         return;
     }
-    // Tambahkan spasi setelah titik untuk Bedrock
+    // Titik untuk Bedrock + spasi
     let displayName = (platform==='bedrock') ? '. ' + name : name;
 
     switch(redirectPage.toLowerCase()){
