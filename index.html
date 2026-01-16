@@ -84,7 +84,7 @@ footer a{color:#00bfff;text-decoration:underline}
 </div>
 
 <!-- Tombol ADD SERVER & STORE -->
-<a class="btn btn-add" href="#">🎮 ADD SERVER</a>
+<a class="btn btn-add" href="minecraft://?addExternalServer=nansmp.net" target="_blank">🎮 ADD SERVER</a>
 <a class="btn btn-store" href="#store">🛒 STORE</a>
 
 <!-- Socials -->
@@ -136,8 +136,6 @@ footer a{color:#00bfff;text-decoration:underline}
 <!-- NANSMP STORE -->
 <div class="section" id="store">
 <h2 style="font-family:'Minecraft',monospace;text-align:center">🛒 NANSMP STORE</h2>
-
-<!-- Tombol beli langsung ke login sesuai jenis -->
 <a class="btn btn-buy rank" href="login.html?to=rank">💎 Beli Rank</a>
 <a class="btn btn-buy money" href="login.html?to=money">💰 Beli Money</a>
 <a class="btn btn-buy skills" href="login.html?to=skills">🛡️ Beli Skills</a>
@@ -157,5 +155,36 @@ footer a{color:#00bfff;text-decoration:underline}
   </p>
 </footer>
 
+<!-- SCRIPT -->
+<script>
+// Smooth scroll untuk tombol STORE
+document.querySelectorAll('.btn-store').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const storeSection = document.getElementById('store');
+        storeSection.scrollIntoView({ behavior: 'smooth' });
+    });
+});
+
+// Tombol Beli langsung ke login
+document.querySelectorAll('.btn-buy').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = btn.getAttribute('href');
+        window.location.href = href; // redirect ke login.html?to=...
+    });
+});
+
+// Tombol copy IP
+document.querySelectorAll('.copy').forEach(el => {
+    el.addEventListener('click', () => {
+        const text = el.textContent.replace(' 📋','');
+        navigator.clipboard.writeText(text).then(() => {
+            alert('IP disalin: ' + text);
+        });
+    });
+});
+</script>
+
 </body>
-                                                                   </html>
+</html>
