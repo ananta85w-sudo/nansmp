@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🛡️ TOPUP SKILLS - NanSMP Store</title>
+<link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
+<style>
+body {
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:url('https://i.imgur.com/ZskENbp.jpeg') center/cover no-repeat fixed;
+    color:#fff;
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+}
+body::before {
+    content:'';
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.6);
+    backdrop-filter:blur(6px);
+    z-index:-1;
+}
+main {
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+.box {
+    background:rgba(0,0,0,0.65);
+    padding:30px 25px;
+    border-radius:16px;
+    text-align:center;
+    max-width:700px;
+    width:100%;
+    box-shadow:0 8px 20px rgba(0,0,0,0.6);
+}
+.box h2 {
+    font-family:'Minecraft',monospace;
+    font-size:28px;
+    margin-bottom:15px;
+}
+.box p {
+    color:#aaa;
+    margin:6px 0;
+    font-size:14px;
+}
+.box p span.player {
+    color:#00ff00;
+    font-weight:bold;
+}
+.input-row {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:12px 0;
+}
+.input-row label {
+    width:80px;
+    text-align:right;
+    font-size:14px;
+}
+.input-row input, .input-row select {
+    flex:1;
+    padding:10px;
+    border-radius:10px;
+    border:none;
+    outline:none;
+    font-size:14px;
+    background:rgba(0,0,0,0.3);
+    color:#fff;
+}
+.box button {
+    padding:12px 20px;
+    margin-top:15px;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(135deg,#00ff00,#008000);
+    color:#fff;
+    font-weight:bold;
+    cursor:pointer;
+    width:70%;
+    font-size:16px;
+}
+.box button:hover {
+    background:linear-gradient(135deg,#008000,#00ff00);
+}
+.result {
+    margin-top:10px;
+    font-size:16px;
+    color:#fff;
+}
+.note {
+    margin-top:8px;
+    font-size:12px;
+    color:#aaa;
+}
+footer {
+    padding:20px;
+    text-align:center;
+    background:rgba(0,0,0,.7);
+    border-radius:16px;
+    margin-top:auto;
+}
+footer a { color:#00bfff; text-decoration:none;}
+footer a:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+
+<main>
+<div class="box">
+<h2>🛡️ TOPUP SKILLS</h2>
+<p>Kamu sudah Masuk/Login!</p>
+<p>Nama: <span class="player" id="player-name">Player123</span></p>
+
+<!-- Pilih skill AuraSkills -->
+<div class="input-row">
+<label for="skill">Skill:</label>
+<select id="skill">
+<option value="Farming">Farming</option>
+<option value="Foraging">Foraging</option>
+<option value="Mining">Mining</option>
+<option value="Fishing">Fishing</option>
+<option value="Excavation">Excavation</option>
+<option value="Archery">Archery</option>
+<option value="Defense">Defense</option>
+<option value="Fighting">Fighting</option>
+<option value="Agility">Agility</option>
+<option value="Enchanting">Enchanting</option>
+<option value="Alchemy">Alchemy</option>
+</select>
+</div>
+
+<!-- Kalkulator horizontal -->
+<div class="input-row">
+<label for="level-input">Level:</label>
+<input type="number" id="level-input" min="1" placeholder="Masukkan jumlah Level">
+<label for="rp-input">Rp:</label>
+<input type="number" id="rp-input" min="1" placeholder="Masukkan jumlah Rupiah">
+</div>
+
+<div class="result" id="result">Total Harga: Rp. 0 | Total Level: 0</div>
+<p class="note">Harga 1 Level = Rp. 2.000 | Skills server reset setiap 3 bulan.</p>
+
+<button id="buy-btn">BELI SEKARANG</button>
+</div>
+</main>
+
+<footer>
+<p>© NanSMP, All rights reserved</p>
+<p>
+<a href="syarat-ketentuan.html">Syarat & Ketentuan</a> |
+<a href="https://discord.gg/4KPhCnvQyf">Discord</a> |
+<a href="https://whatsapp.com/channel/0029VaqnH97L7UVWBeMAyX2I">WhatsApp</a>
+</p>
+<p><a href="https://store.nansmp.net" target="_blank">store.nansmp.net</a></p>
+<p style="color:#ccc;font-size:12px;margin-top:6px;">
+NanSMP tidak berafiliasi dengan Mojang Studios atau Microsoft.
+</p>
+</footer>
+
+<script>
+// Ambil nama player dari URL
+const urlParams = new URLSearchParams(window.location.search);
+const playerName = urlParams.get('player') || 'Player123';
+document.getElementById('player-name').textContent = playerName;
+
+// Harga per level
+const pricePerLevel = 2000;
+
+const levelInput = document.getElementById('level-input');
+const rpInput = document.getElementById('rp-input');
+const result = document.getElementById('result');
+const skillSelect = document.getElementById('skill');
+const buyBtn = document.getElementById('buy-btn');
+
+// Kalkulasi otomatis
+function updateFromLevel(){
+    const level = parseInt(levelInput.value) || 0;
+    const totalRp = level * pricePerLevel;
+    rpInput.value = totalRp;
+    result.textContent = `Total Harga: Rp. ${totalRp.toLocaleString()} | Total Level: ${level}`;
+}
+function updateFromRp(){
+    const rp = parseInt(rpInput.value) || 0;
+    const totalLevel = Math.floor(rp / pricePerLevel);
+    levelInput.value = totalLevel;
+    result.textContent = `Total Harga: Rp. ${rp.toLocaleString()} | Total Level: ${totalLevel}`;
+}
+levelInput.addEventListener('input', updateFromLevel);
+rpInput.addEventListener('input', updateFromRp);
+
+// Tombol beli ke WhatsApp
+buyBtn.addEventListener('click', ()=>{
+    const skill = skillSelect.value;
+    const level = parseInt(levelInput.value) || 0;
+    const rp = parseInt(rpInput.value) || 0;
+
+    const now = new Date();
+    const dayNames = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+    const day = dayNames[now.getDay()];
+    const dateStr = `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()}, ${day}, `
+        + `${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')} WIB, `
+        + `${(now.getHours()+1).toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')} WITA, `
+        + `${(now.getHours()+2).toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')} WIT`;
+
+    const text = `---------------TOPUP SKILLS----------------
+Nama Minecraft: ${playerName}
+Tanggal/Tahun: ${dateStr}
+Skill: ${skill}
+Topup: ${level} Level
+Harga: Rp. ${rp.toLocaleString()}
+--------------------------------------------------------`;
+
+    const waNumber = '6285792819204';
+    window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`, '_blank');
+});
+</script>
+
+</body>
+  </html>
