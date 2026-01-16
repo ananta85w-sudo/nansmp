@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>💰 TOPUP MONEY - NanSMP Store</title>
+<title>Login - NanSMP Store</title>
 <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
 <style>
 body {
@@ -30,68 +30,82 @@ main {
     justify-content:center;
     padding:20px;
 }
-.box {
+.login-box {
     background:rgba(0,0,0,0.65);
     padding:30px 25px;
     border-radius:16px;
     text-align:center;
-    max-width:500px;
+    max-width:450px;
     width:100%;
     box-shadow:0 8px 20px rgba(0,0,0,0.6);
 }
-.box h2 {
+.login-box h2 {
     font-family:'Minecraft',monospace;
     font-size:28px;
-    margin-bottom:20px;
-}
-.box p {
-    color:#aaa;
-    margin:6px 0;
-    font-size:14px;
-}
-.box p span.player {
-    color:#00ff00;
-    font-weight:bold;
+    margin-bottom:25px;
+    color:#fff;
 }
 .input-group {
     display:flex;
-    justify-content:center;
-    margin:15px 0;
+    align-items:center;
+    justify-content:flex-start;
+    position:relative;
+    margin-bottom:15px;
+}
+.input-group select {
+    padding:10px;
+    border-radius:10px 0 0 10px;
+    border:none;
+    background:#111;
+    color:#fff;
+    outline:none;
+    cursor:pointer;
+}
+.input-group .dot {
+    position:absolute;
+    left:calc(100px + 8px);
+    top:50%;
+    transform:translateY(-50%);
+    color:#fff;
+    font-weight:bold;
+    user-select:none;
+    pointer-events:none;
+    display:none;
+    font-size:18px;
 }
 .input-group input {
-    padding:10px;
-    border-radius:10px;
+    padding:10px 10px 10px 25px; /* space for dot */
+    border-radius:0 10px 10px 0;
     border:none;
+    flex:1;
     outline:none;
-    width:60%;
-    font-size:14px;
     background:rgba(0,0,0,0.3);
     color:#fff;
+    font-size:14px;
 }
-.box button {
+.login-box button {
     padding:12px 20px;
     margin-top:10px;
     border:none;
     border-radius:14px;
-    background:linear-gradient(135deg,#00ff00,#008000);
+    background:linear-gradient(135deg,#00bfff,#0072ff);
     color:#fff;
     font-weight:bold;
     cursor:pointer;
-    width:70%;
+    width:80%;
     font-size:16px;
 }
-.box button:hover {
-    background:linear-gradient(135deg,#008000,#00ff00);
+.login-box button:hover {
+    background:linear-gradient(135deg,#0072ff,#00bfff);
 }
-.money-result {
-    margin-top:12px;
-    font-size:16px;
-    color:#fff;
+.login-box p.notice {
+    font-size:13px;
+    color:#ccc;
+    margin-top:10px;
 }
-.money-note {
-    margin-top:8px;
-    font-size:12px;
-    color:#aaa;
+.login-box p.notice a {
+    color:#00bfff;
+    text-decoration:underline;
 }
 footer {
     padding:20px;
@@ -100,25 +114,35 @@ footer {
     border-radius:16px;
     margin-top:auto;
 }
-footer a { color:#00bfff; text-decoration:none;}
-footer a:hover { text-decoration:underline; }
+footer a {
+    color:#00bfff;
+    text-decoration:none;
+}
+footer a:hover {
+    text-decoration:underline;
+}
 </style>
 </head>
 <body>
+
 <main>
-<div class="box">
-<h2>💰 TOPUP MONEY</h2>
-<p>Kamu sudah Masuk/Login!</p>
-<p>Nama: <span class="player" id="player-name">Player123</span></p>
+<div class="login-box">
+<h2>🔑 MASUK</h2>
 
 <div class="input-group">
-<input type="number" id="rupiah-input" placeholder="Masukkan jumlah Rupiah">
+<select id="platform">
+<option value="java">JAVA</option>
+<option value="bedrock">BEDROCK</option>
+</select>
+<span class="dot" id="dot">.</span>
+<input type="text" id="player-name" placeholder="Nama Minecraft">
 </div>
 
-<div class="money-result" id="money-result">Total Money: <span style="color:#00ff00">0</span></div>
-<p class="money-note">Money server reset setiap 3 bulan.</p>
+<p class="notice">
+Dengan login, anda menyetujui <a href="syarat-ketentuan.html">Syarat dan Ketentuan</a>.
+</p>
 
-<button id="buy-btn">BELI SEKARANG</button>
+<button id="login-btn">Log In</button>
 </div>
 </main>
 
@@ -130,65 +154,50 @@ footer a:hover { text-decoration:underline; }
 <a href="https://whatsapp.com/channel/0029VaqnH97L7UVWBeMAyX2I">WhatsApp</a>
 </p>
 <p><a href="https://store.nansmp.net" target="_blank">store.nansmp.net</a></p>
-<p style="color:#ccc;font-size:12px;margin-top:6px;">
+<p style="font-family:Arial,Helvetica,sans-serif;color:#ccc;font-size:12px;margin-top:6px;">
 NanSMP tidak berafiliasi dengan Mojang Studios atau Microsoft.
 </p>
 </footer>
 
 <script>
-// Ambil nama player dari URL
+const platformSelect = document.getElementById('platform');
+const dot = document.getElementById('dot');
+const playerNameInput = document.getElementById('player-name');
+const loginBtn = document.getElementById('login-btn');
+
 const urlParams = new URLSearchParams(window.location.search);
-const playerName = urlParams.get('player') || 'Player123';
-document.getElementById('player-name').textContent = playerName;
+const redirectPage = urlParams.get('to') || 'rank';
 
-// Kalkulator Money
-const rupiahInput = document.getElementById('rupiah-input');
-const moneyResult = document.getElementById('money-result');
-const conversionRate = 60; // 1 RP = 60 Money server
-
-function formatMoney(money){
-    if(money >= 1_000_000_000_000){
-        let t = money/1_000_000_000_000;
-        if(t>10) t=10;
-        return t.toFixed(1).replace(/\.0$/,'')+'t';
-    } else if(money >= 1_000_000_000){
-        return (money/1_000_000_000).toFixed(1).replace(/\.0$/,'')+'b';
-    } else if(money >= 1_000_000){
-        return (money/1_000_000).toFixed(1).replace(/\.0$/,'')+'m';
-    } else if(money >= 1000){
-        return (money/1000).toFixed(1).replace(/\.0$/,'')+'k';
+function updateDot() {
+    if(platformSelect.value === 'bedrock'){
+        dot.style.display = 'inline-block';
     } else {
-        return money;
+        dot.style.display = 'none';
     }
 }
+platformSelect.addEventListener('change', updateDot);
+updateDot();
 
-rupiahInput.addEventListener('input', ()=>{
-    let rp = parseFloat(rupiahInput.value);
-    if(isNaN(rp) || rp <=0){
-        moneyResult.innerHTML = 'Total Money: <span style="color:#00ff00">0</span>';
+loginBtn.addEventListener('click', () => {
+    let name = playerNameInput.value.trim();
+    const platform = platformSelect.value;
+    if(name === ''){
+        alert('Masukkan nama Minecraft!');
         return;
     }
-    let money = Math.round(rp * conversionRate);
-    moneyResult.innerHTML = 'Total Money: <span style="color:#00ff00">'+formatMoney(money)+'</span>';
-});
+    // Titik untuk Bedrock + spasi
+    let displayName = (platform==='bedrock') ? '. ' + name : name;
 
-// Tombol BELI SEKARANG buka WhatsApp
-document.getElementById('buy-btn').addEventListener('click', ()=>{
-    let rp = parseFloat(rupiahInput.value);
-    if(isNaN(rp) || rp <=0){
-        alert('Masukkan jumlah Rupiah dulu!');
-        return;
+    switch(redirectPage.toLowerCase()){
+        case 'money':
+            window.location.href = 'money.html?player=' + encodeURIComponent(displayName);
+            break;
+        case 'skills':
+            window.location.href = 'skills.html?player=' + encodeURIComponent(displayName);
+            break;
+        default:
+            window.location.href = 'rank.html?player=' + encodeURIComponent(displayName);
     }
-    let money = Math.round(rp * conversionRate);
-    const today = new Date();
-    const day = today.getDate();
-    const month = today.getMonth()+1;
-    const year = today.getFullYear();
-
-    const message = `---------------TOPUP MONEY-----------------\nNama Minecraft: ${playerName}\nTanggal/Tahun: ${day}/${month}/${year}\nJumlah money: ${money}\nHarga: Rp. ${rp.toLocaleString()}\n--------------------------------------------------------`;
-
-    const waLink = `https://wa.me/62881038098059?text=${encodeURIComponent(message)}`;
-    window.open(waLink,'_blank');
 });
 </script>
 
