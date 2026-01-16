@@ -115,7 +115,7 @@ footer a:hover { text-decoration:underline; }
 <input type="number" id="rupiah-input" placeholder="Masukkan jumlah Rupiah">
 </div>
 
-<div class="money-result" id="money-result">Total Money: 0</div>
+<div class="money-result" id="money-result">Total Money: <span style="color:#00ff00">0</span></div>
 <p class="money-note">Money server reset setiap 3 bulan.</p>
 
 <button id="buy-btn">BELI SEKARANG</button>
@@ -136,7 +136,7 @@ NanSMP tidak berafiliasi dengan Mojang Studios atau Microsoft.
 </footer>
 
 <script>
-// Ambil nama player dari URL (misal ?player=Farhan)
+// Ambil nama player dari URL
 const urlParams = new URLSearchParams(window.location.search);
 const playerName = urlParams.get('player') || 'Player123';
 document.getElementById('player-name').textContent = playerName;
@@ -144,61 +144,53 @@ document.getElementById('player-name').textContent = playerName;
 // Kalkulator Money
 const rupiahInput = document.getElementById('rupiah-input');
 const moneyResult = document.getElementById('money-result');
+const conversionRate = 60; // 1 RP = 60 Money server
 
-// Contoh konversi: 1 RP = 60 Money server
-function calcMoney(rp){
-    return rp * 60;
-}
-
-// Fungsi format Money (k,m,b,t), maksimal 10T
 function formatMoney(money){
     if(money >= 1_000_000_000_000){
         let t = money/1_000_000_000_000;
-        if(t>10) t = 10;
-        return t.toFixed(1).replace(/\.0$/,'') + 'T';
+        if(t>10) t=10;
+        return t.toFixed(1).replace(/\.0$/,'')+'t';
     } else if(money >= 1_000_000_000){
-        return (money/1_000_000_000).toFixed(1).replace(/\.0$/,'') + 'B';
+        return (money/1_000_000_000).toFixed(1).replace(/\.0$/,'')+'b';
     } else if(money >= 1_000_000){
-        return (money/1_000_000).toFixed(1).replace(/\.0$/,'') + 'M';
+        return (money/1_000_000).toFixed(1).replace(/\.0$/,'')+'m';
     } else if(money >= 1000){
-        return (money/1000).toFixed(1).replace(/\.0$/,'') + 'k';
+        return (money/1000).toFixed(1).replace(/\.0$/,'')+'k';
     } else {
         return money;
     }
 }
 
-// Event input
-rupiahInput.addEventListener('input', () => {
-    let rp = parseFloat(rupiahInput.value);
-    if(isNaN(rp) || rp <= 0){
-        moneyResult.textContent = 'Total Money: 0';
-        return;
-    }
-    let money = calcMoney(rp);
-    moneyResult.innerHTML = 'Total Money: <span style="color:#00ff00">' + formatMoney(money) + '</span>';
-});
-
-// Tombol beli langsung ke WhatsApp
-document.getElementById('buy-btn').addEventListener('click', () => {
+rupiahInput.addEventListener('input', ()=>{
     let rp = parseFloat(rupiahInput.value);
     if(isNaN(rp) || rp <=0){
-        alert('Masukkan jumlah Rupiah valid!');
+        moneyResult.innerHTML = 'Total Money: <span style="color:#00ff00">0</span>';
         return;
     }
-    let money = calcMoney(rp);
+    let money = Math.round(rp * conversionRate);
+    moneyResult.innerHTML = 'Total Money: <span style="color:#00ff00">'+formatMoney(money)+'</span>';
+});
+
+// Tombol BELI SEKARANG buka WhatsApp
+document.getElementById('buy-btn').addEventListener('click', ()=>{
+    let rp = parseFloat(rupiahInput.value);
+    if(isNaN(rp) || rp <=0){
+        alert('Masukkan jumlah Rupiah dulu!');
+        return;
+    }
+    let money = Math.round(rp * conversionRate);
     const today = new Date();
-    const dateStr = today.toLocaleDateString('id-ID');
+    const day = today.getDate();
+    const month = today.getMonth()+1;
+    const year = today.getFullYear();
 
-    const text = `---------------TOPUP MONEY-----------------
-Nama Minecraft: ${playerName}
-Tanggal/Tahun: ${dateStr}
-Jumlah money: ${money}
-----------------------------------------------`;
+    const message = `---------------TOPUP MONEY-----------------\nNama Minecraft: ${playerName}\nTanggal/Tahun: ${day}/${month}/${year}\nJumlah money: ${money}\nHarga: Rp. ${rp.toLocaleString()}\n--------------------------------------------------------`;
 
-    const waURL = 'https://wa.me/62881038098059?text=' + encodeURIComponent(text);
-    window.open(waURL, '_blank');
+    const waLink = `https://wa.me/62881038098059?text=${encodeURIComponent(message)}`;
+    window.open(waLink,'_blank');
 });
 </script>
 
 </body>
-  </html>
+</html>
