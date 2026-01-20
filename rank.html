@@ -8,16 +8,16 @@
 <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
 
 <style>
-body {
+body{
     margin:0;
     font-family:Arial,Helvetica,sans-serif;
     background:url('https://i.imgur.com/ZskENbp.jpeg') center/cover no-repeat fixed;
     color:#fff;
+    min-height:100vh;
     display:flex;
     flex-direction:column;
-    min-height:100vh;
 }
-body::before {
+body::before{
     content:'';
     position:fixed;
     inset:0;
@@ -25,20 +25,19 @@ body::before {
     backdrop-filter:blur(6px);
     z-index:-1;
 }
-main {
+main{
     flex:1;
     display:flex;
     flex-direction:column;
     align-items:center;
     padding:20px;
 }
-h1 {
+h1{
     font-family:'Minecraft',monospace;
     font-size:36px;
     margin-bottom:15px;
-    text-align:center;
 }
-.login-success {
+.login-success{
     background:rgba(0,0,0,.65);
     padding:15px 20px;
     border-radius:14px;
@@ -46,67 +45,66 @@ h1 {
     width:100%;
     margin-bottom:20px;
 }
-.login-success span.player {
+.login-success .player{
     color:#00ff00;
     font-weight:bold;
 }
-.rank-container {
+.rank-container{
     display:flex;
     flex-direction:column;
     gap:25px;
     max-width:700px;
     width:100%;
 }
-.rank-box {
+.rank-box{
     background:rgba(0,0,0,.65);
     border-radius:14px;
     padding:20px;
     cursor:pointer;
     transition:.2s;
-    min-height:220px;
 }
-.rank-box:hover {
+.rank-box:hover{
     transform:scale(1.02);
     box-shadow:0 0 20px rgba(0,255,0,.5);
 }
-.rank-header {
+.rank-header{
     display:flex;
     justify-content:space-between;
     align-items:center;
 }
-.rank-header .name {
+.rank-header .name{
     font-family:'Minecraft',monospace;
     font-size:36px;
 }
-.rank-header .price {
+.rank-header .price{
     font-size:22px;
     font-weight:bold;
 }
-.rank-footer {
+.rank-footer{
     font-family:'Minecraft',monospace;
     font-size:12px;
     color:#ccc;
-    margin-top:10px;
+    margin-top:8px;
 }
-.rank-features {
+.rank-features{
     display:none;
-    margin-top:10px;
+    margin-top:12px;
 }
-.rank-features ul {
+.rank-features ul{
     list-style:none;
     padding:0;
+    margin:0;
 }
-.rank-features li {
+.rank-features li{
     margin:4px 0;
-    font-size:14px;
 }
-.buy-row {
+.buy-row{
     display:flex;
     justify-content:space-between;
     align-items:center;
     margin-top:12px;
 }
-.buy-row button {
+.buy-row button{
     padding:10px 20px;
     border:none;
     border-radius:12px;
@@ -115,18 +113,15 @@ h1 {
     font-weight:bold;
     cursor:pointer;
 }
-footer {
+footer{
     margin-top:auto;
     padding:20px;
     text-align:center;
     background:rgba(0,0,0,.7);
     border-radius:16px;
 }
-footer a {
-    color:#00bfff;
-    text-decoration:none;
-}
-footer a:hover { text-decoration:underline; }
+footer a{color:#00bfff;text-decoration:none}
+footer a:hover{text-decoration:underline}
 
 /* Warna rank */
 .rank-Vip .name{color:#00ffff}
@@ -148,9 +143,9 @@ footer a:hover { text-decoration:underline; }
 <p>✅ Berhasil Login!</p>
 <p>Nama Minecraft: <span class="player" id="player-name">Player123</span></p>
 <ul>
-<li>Rank bersifat <b>permanen</b></li>
-<li>Tidak dapat refund</li>
-<li>Bisa pindah akun setelah konfirmasi admin</li>
+<li>Rank bersifat permanen</li>
+<li>Tidak bisa refund</li>
+<li>Pindah akun via konfirmasi admin</li>
 </ul>
 </div>
 
@@ -164,7 +159,7 @@ footer a:hover { text-decoration:underline; }
 <a href="https://discord.gg/4KPhCnvQyf">Discord</a> |
 <a href="https://whatsapp.com/channel/0029VaqnH97L7UVWBeMAyX2I">WhatsApp</a>
 </p>
-<p><a href="https://store.nansmp.net" target="_blank">store.nansmp.net</a></p>
+<p><a href="https://store.nansmp.net">store.nansmp.net</a></p>
 <p style="font-size:12px;color:#ccc">Tidak berafiliasi dengan Mojang atau Microsoft</p>
 </footer>
 
@@ -174,60 +169,61 @@ const playerName = params.get('player') || 'Player123';
 document.getElementById('player-name').textContent = playerName;
 
 const rankData = {
-"Vip":{price:15000,features:["Anvil","Heal","Feed","Nick","Repair","Skull","Blocklimit 14k","Claim 6x","Sethome 6x"]},
-"Vip+":{price:30000,features:["Anvil","Heal","Feed","Nick","Repair","Skull","Fly","Blocklimit 35k","Claim 9x","Sethome 9x"]},
-"Mvp":{price:50000,features:["Anvil","Heal","Feed","Nick","Repair","Skull","Fly","Tp","Speed","Blocklimit 50k","Claim 12x","Sethome 12x"]},
-"Mvp+":{price:80000,features:["Anvil","Heal","Feed","Nick","Repair","Skull","Fly","Tp","God","Speed","Time set","Blocklimit 75k","Claim 15x","Sethome 15x"]},
-"Yongsun":{price:120000,features:["Anvil","Heal","Feed","Nick","Repair","Skull","Fly","Tp","God","Speed","Time set","Vanish","Weather","Blocklimit 100k","Claim 20x","Sethome 20x"]},
-"Yongsun+":{price:170000,features:["Anvil","Heal","Feed","Nick","Repair","Skull","Fly","Tp","God","Speed","Time set","Vanish","Weather","Invsee","Blocklimit 125k","Claim 25x","Sethome 25x"]},
-"Nightmare":{price:200000,features:["Anvil","Heal","Feed","Nick","Repair","Skull","Fly","Tp","God","Speed","Vanish","Weather","Invsee","Effect","Blocklimit 500k","Claim 50x","Sethome 50x"]},
-"Nightmare+":{price:300000,features:["Anvil","Heal","Feed","Nick","Repair","Skull","Fly","Tp","God","Speed","Vanish","Weather","Invsee","Effect","Blocklimit 1M","Claim 1000x","Sethome 1000x"]}
+ "Vip":{price:15000,features:["Anvil","Heal","Feed","Nick","Repair","Skull","Blocklimit 14k","Claim 6x","Sethome 6x"]},
+ "Vip+":{price:30000,features:["Anvil","Heal","Feed","Nick","Repair","Skull","Fly","Blocklimit 35k","Claim 9x","Sethome 9x"]},
+ "Mvp":{price:50000,features:["Anvil","Heal","Feed","Nick","Repair","Skull","Fly","Tp","Speed","Blocklimit 50k","Claim 12x","Sethome 12x"]},
+ "Mvp+":{price:80000,features:["Anvil","Heal","Feed","Nick","Repair","Skull","Fly","Tp","God","Speed","Time set","Blocklimit 75k","Claim 15x","Sethome 15x"]},
+ "Yongsun":{price:120000,features:["Anvil","Heal","Feed","Nick","Repair","Skull","Fly","Tp","God","Speed","Time set","Vanish","Weather","Blocklimit 100k","Claim 20x","Sethome 20x"]},
+ "Yongsun+":{price:170000,features:["Anvil","Heal","Feed","Nick","Repair","Skull","Fly","Tp","God","Speed","Time set","Vanish","Weather","Invsee","Blocklimit 125k","Claim 25x","Sethome 25x"]},
+ "Nightmare":{price:200000,features:["Anvil","Heal","Feed","Nick","Repair","Skull","Fly","Tp","God","Speed","Vanish","Weather","Invsee","Effect","Blocklimit 500k","Claim 50x","Sethome 50x"]},
+ "Nightmare+":{price:300000,features:["Anvil","Heal","Feed","Nick","Repair","Skull","Fly","Tp","God","Speed","Vanish","Weather","Invsee","Effect","Blocklimit 1M","Claim 1000x","Sethome 1000x"]}
 };
 
 const container = document.getElementById('rank-container');
 
-for(const [name,data] of Object.entries(rankData)){
+for(const [rankName, data] of Object.entries(rankData)){
     const box=document.createElement('div');
-    box.className='rank-box rank-'+name.replace('+','plus');
+    box.className='rank-box rank-'+rankName.replace('+','plus');
+
     box.innerHTML=`
-        <div class="rank-header">
-            <span class="name">${name}</span>
-            <span class="price">Rp ${data.price.toLocaleString()}</span>
+    <div class="rank-header">
+        <span class="name">${rankName}</span>
+        <span class="price">Rp ${data.price.toLocaleString()}</span>
+    </div>
+    <div class="rank-footer">Klik untuk melihat fitur</div>
+    <div class="rank-features">
+        <ul>${data.features.map(f=>`<li>${f}</li>`).join('')}</ul>
+        <div class="buy-row">
+            <button>BELI SEKARANG!</button>
+            <b>Rp ${data.price.toLocaleString()}</b>
         </div>
-        <div class="rank-footer">Klik untuk lihat fitur</div>
-        <div class="rank-features">
-            <ul>${data.features.map(f=>`<li>${f}</li>`).join('')}</ul>
-            <div class="buy-row">
-                <button>BELI</button>
-                <b>Rp ${data.price.toLocaleString()}</b>
-            </div>
-        </div>`;
+    </div>`;
     container.appendChild(box);
 
-    box.querySelector('button').onclick = () => {
-    const now = new Date();
+    const features = box.querySelector('.rank-features');
 
-    const timeWIB  = now.toLocaleTimeString('id-ID', { hour:'2-digit', minute:'2-digit' });
-    const timeWITA = new Date(now.getTime()+3600000).toLocaleTimeString('id-ID', { hour:'2-digit', minute:'2-digit' });
-    const timeWIT  = new Date(now.getTime()+7200000).toLocaleTimeString('id-ID', { hour:'2-digit', minute:'2-digit' });
+    box.addEventListener('click',e=>{
+        if(e.target.tagName === 'BUTTON') return;
+        features.style.display = features.style.display==='block'?'none':'block';
+    });
 
-    const text =
+    box.querySelector('button').onclick = (e)=>{
+        e.stopPropagation();
+        const now = new Date();
+        const text =
 `----------BELI / UPGRADE RANK-----------
 Nama Minecraft: ${playerName}
-Tanggal/Tahun: ${now.toLocaleDateString('id-ID')}
+Tanggal: ${now.toLocaleDateString('id-ID')}
 Waktu:
-- ${timeWIB} WIB
-- ${timeWITA} WITA
-- ${timeWIT} WIT
-Beli Rank: ${rk}
-Harga: Rp. ${d.price.toLocaleString()}
+- ${now.toLocaleTimeString('id-ID')} WIB
+- ${new Date(now.getTime()+3600000).toLocaleTimeString('id-ID')} WITA
+- ${new Date(now.getTime()+7200000).toLocaleTimeString('id-ID')} WIT
+Beli Rank: ${rankName}
+Harga: Rp. ${data.price.toLocaleString()}
 --------------------------------------------------------`;
 
-    window.open(
-        `https://wa.me/6287780959219?text=${encodeURIComponent(text)}`,
-        '_blank'
-    );
-};
+        window.open(`https://wa.me/6287780959219?text=${encodeURIComponent(text)}`,'_blank');
+    };
 }
 </script>
 </body>
