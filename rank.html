@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LIST & FITUR RANK - NanSMP Store</title>
+
 <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
+
 <style>
 body {
     margin:0;
@@ -28,7 +30,6 @@ main {
     display:flex;
     flex-direction:column;
     align-items:center;
-    justify-content:flex-start;
     padding:20px;
 }
 h1 {
@@ -38,14 +39,12 @@ h1 {
     text-align:center;
 }
 .login-success {
-    background:rgba(0,0,0,0.65);
+    background:rgba(0,0,0,.65);
     padding:15px 20px;
     border-radius:14px;
-    text-align:left;
     max-width:700px;
     width:100%;
     margin-bottom:20px;
-    color:#fff;
 }
 .login-success span.player {
     color:#00ff00;
@@ -59,32 +58,27 @@ h1 {
     width:100%;
 }
 .rank-box {
-    background:rgba(0,0,0,0.65);
+    background:rgba(0,0,0,.65);
     border-radius:14px;
     padding:20px;
     cursor:pointer;
-    transition:all 0.2s;
-    min-height:220px; /* Lebih tinggi ke bawah */
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-start;
+    transition:.2s;
+    min-height:220px;
 }
 .rank-box:hover {
     transform:scale(1.02);
-    box-shadow:0 0 20px rgba(0,255,0,0.5);
+    box-shadow:0 0 20px rgba(0,255,0,.5);
 }
 .rank-header {
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:10px;
 }
-.rank-header span.name {
+.rank-header .name {
     font-family:'Minecraft',monospace;
-    font-size:36px; /* Nama rank lebih besar */
-    font-weight:bold;
+    font-size:36px;
 }
-.rank-header span.price {
+.rank-header .price {
     font-size:22px;
     font-weight:bold;
 }
@@ -100,20 +94,19 @@ h1 {
 }
 .rank-features ul {
     list-style:none;
-    padding-left:0;
-    margin:0;
+    padding:0;
 }
-.rank-features ul li {
+.rank-features li {
     margin:4px 0;
     font-size:14px;
 }
-.rank-features .buy-row {
+.buy-row {
     display:flex;
     justify-content:space-between;
     align-items:center;
     margin-top:12px;
 }
-.rank-features .buy-row button {
+.buy-row button {
     padding:10px 20px;
     border:none;
     border-radius:12px;
@@ -123,137 +116,106 @@ h1 {
     cursor:pointer;
 }
 footer {
+    margin-top:auto;
     padding:20px;
     text-align:center;
     background:rgba(0,0,0,.7);
     border-radius:16px;
-    margin-top:auto;
 }
-footer a { color:#00bfff; text-decoration:none;}
+footer a {
+    color:#00bfff;
+    text-decoration:none;
+}
 footer a:hover { text-decoration:underline; }
 
-/* Warna tiap rank */
-.rank-Vip .rank-header span.name { color:#00ffff; }       /* cyan */
-.rank-Vipplus .rank-header span.name { color:#00ff00; }    /* green */
-.rank-Mvp .rank-header span.name { color:#ffcc00; }       /* gold */
-.rank-Mvpplus .rank-header span.name { color:#ff9900; }    /* orange */
-.rank-Yongsun .rank-header span.name { color:#ff66ff; }   /* pink */
-.rank-Yongsunplus .rank-header span.name { color:#ff33ff; }/* magenta */
-.rank-Nightmare .rank-header span.name { color:#ff0000; } /* red */
-.rank-Nightmareplus .rank-header span.name { color:#9900ff; }/* purple */
+/* Warna rank */
+.rank-Vip .name{color:#00ffff}
+.rank-Vipplus .name{color:#00ff00}
+.rank-Mvp .name{color:#ffcc00}
+.rank-Mvpplus .name{color:#ff9900}
+.rank-Yongsun .name{color:#ff66ff}
+.rank-Yongsunplus .name{color:#ff33ff}
+.rank-Nightmare .name{color:#ff0000}
+.rank-Nightmareplus .name{color:#9900ff}
 </style>
 </head>
+
 <body>
 <main>
 <h1>LIST & FITUR RANK</h1>
 
 <div class="login-success">
-<p>✅ Berhasil Masuk/Login!</p>
-<p>Nama Minecraft Kamu: <span class="player" id="player-name">Player123</span></p>
-<p>Catatan:</p>
+<p>✅ Berhasil Login!</p>
+<p>Nama Minecraft: <span class="player" id="player-name">Player123</span></p>
 <ul>
-<li>Semua rank bersifat permanen.</li>
-<li>Tidak bisa refund.</li>
-<li>Jika kamu ganti akun atau akun hilang, rank dapat dipindahkan ke akun baru setelah konfirmasi.</li>
+<li>Rank bersifat <b>permanen</b></li>
+<li>Tidak dapat refund</li>
+<li>Bisa pindah akun setelah konfirmasi admin</li>
 </ul>
 </div>
 
-<div class="rank-container" id="rank-container">
-<!-- Rank boxes akan diisi via JS -->
-</div>
+<div class="rank-container" id="rank-container"></div>
 </main>
 
 <footer>
-<p>© NanSMP, All rights reserved</p>
+<p>© NanSMP</p>
 <p>
 <a href="syarat-ketentuan.html">Syarat & Ketentuan</a> |
 <a href="https://discord.gg/4KPhCnvQyf">Discord</a> |
 <a href="https://whatsapp.com/channel/0029VaqnH97L7UVWBeMAyX2I">WhatsApp</a>
 </p>
 <p><a href="https://store.nansmp.net" target="_blank">store.nansmp.net</a></p>
-<p style="color:#ccc;font-size:12px;margin-top:6px;">NanSMP tidak berafiliasi dengan Mojang Studios atau Microsoft.</p>
+<p style="font-size:12px;color:#ccc">Tidak berafiliasi dengan Mojang atau Microsoft</p>
 </footer>
 
 <script>
-// Ambil nama player dari URL
-const urlParams = new URLSearchParams(window.location.search);
-const playerName = urlParams.get('player') || 'Player123';
+const params = new URLSearchParams(window.location.search);
+const playerName = params.get('player') || 'Player123';
 document.getElementById('player-name').textContent = playerName;
 
-// Data fitur tiap rank
 const rankData = {
-"Vip": { price:15000, features:["Anvil","Heal","Feed","Nick","Repair","Skull","Blocklimit: 14.000 × 14.000","Claimlimit: 6x","Sethome: 6x"] },
-"Vip+": { price:30000, features:["Anvil","Heal","Feed","Nick","Repair","Skull","Fly","Blocklimit: 35.000 × 35.000","Claimlimit: 9x","Sethome: 9x"] },
-"Mvp": { price:50000, features:["Anvil","Heal","Potion","Enchant","Feed","Nick","Repair","Skull","Fly","Tp","Speed","Blocklimit: 50.000 × 50.000","Claimlimit: 12x","Sethome: 12x"] },
-"Mvp+": { price:80000, features:["Anvil","Heal","Potion","Enchant","Feed","Nick","Repair","Skull","Fly","Tp","God","Speed","Time set","Blocklimit: 75.000 × 75.000","Claimlimit: 15x","Sethome: 15x"] },
-"Yongsun": { price:120000, features:["Anvil","Heal","Potion","Enchant","Feed","Nick","Repair","Skull","Fly","Tp","God","Speed","Time set","Vanish","Weather","Blocklimit: 100.000 × 100.000","Claimlimit: 20x","Sethome: 20x"] },
-"Yongsun+": { price:170000, features:["Anvil","Heal","Potion","Enchant","Feed","Nick","Repair","Skull","Fly","Tp","God","Speed","Time set","Vanish","Weather","Invsee","Blocklimit: 125.000 × 125.000","Claimlimit: 25x","Sethome: 25x"] },
-"Nightmare": { price:200000, features:["Anvil","Heal","Potion","Enchant","Feed","Nick","Repair","Skull","Fly","Tp","God","Speed","Time set","Vanish","Weather","Invsee","Effect","Blocklimit: 500.000 × 500.000","Claimlimit: 50x","Sethome: 50x"] },
-"Nightmare+": { price:300000, features:["Anvil","Heal","Potion","Enchant","Feed","Nick","Repair","Skull","Fly","Tp","God","Speed","Time set","Vanish","Weather","Invsee","Effect","Exp x5","Blocklimit: 1.000.000 × 1.000.000","Claimlimit: 1000x","Sethome: 1000x"] }
+"Vip":{price:15000,features:["Anvil","Heal","Feed","Nick","Repair","Skull","Blocklimit 14k","Claim 6x","Sethome 6x"]},
+"Vip+":{price:30000,features:["Anvil","Heal","Feed","Nick","Repair","Skull","Fly","Blocklimit 35k","Claim 9x","Sethome 9x"]},
+"Mvp":{price:50000,features:["Anvil","Heal","Feed","Nick","Repair","Skull","Fly","Tp","Speed","Blocklimit 50k","Claim 12x","Sethome 12x"]},
+"Mvp+":{price:80000,features:["Anvil","Heal","Feed","Nick","Repair","Skull","Fly","Tp","God","Speed","Time set","Blocklimit 75k","Claim 15x","Sethome 15x"]},
+"Yongsun":{price:120000,features:["Anvil","Heal","Feed","Nick","Repair","Skull","Fly","Tp","God","Speed","Time set","Vanish","Weather","Blocklimit 100k","Claim 20x","Sethome 20x"]},
+"Yongsun+":{price:170000,features:["Anvil","Heal","Feed","Nick","Repair","Skull","Fly","Tp","God","Speed","Time set","Vanish","Weather","Invsee","Blocklimit 125k","Claim 25x","Sethome 25x"]},
+"Nightmare":{price:200000,features:["Anvil","Heal","Feed","Nick","Repair","Skull","Fly","Tp","God","Speed","Vanish","Weather","Invsee","Effect","Blocklimit 500k","Claim 50x","Sethome 50x"]},
+"Nightmare+":{price:300000,features:["Anvil","Heal","Feed","Nick","Repair","Skull","Fly","Tp","God","Speed","Vanish","Weather","Invsee","Effect","Blocklimit 1M","Claim 1000x","Sethome 1000x"]}
 };
 
-// Buat rank box
-const rankContainer = document.getElementById('rank-container');
-for (const [rankName, rank] of Object.entries(rankData)) {
-    const box = document.createElement('div');
-    box.classList.add('rank-box','rank-'+rankName.replace('+','plus'));
-    box.dataset.rank = rankName;
-    box.innerHTML = `
+const container = document.getElementById('rank-container');
+
+for(const [name,data] of Object.entries(rankData)){
+    const box=document.createElement('div');
+    box.className='rank-box rank-'+name.replace('+','plus');
+    box.innerHTML=`
         <div class="rank-header">
-            <span class="name">${rankName}</span>
-            <span class="price">Rp. ${rank.price.toLocaleString()}</span>
+            <span class="name">${name}</span>
+            <span class="price">Rp ${data.price.toLocaleString()}</span>
         </div>
-        <div class="rank-footer">Klik untuk membeli/melihat fitur rank</div>
+        <div class="rank-footer">Klik untuk lihat fitur</div>
         <div class="rank-features">
-            <ul>${rank.features.map(f=>`<li>${f}</li>`).join('')}</ul>
+            <ul>${data.features.map(f=>`<li>${f}</li>`).join('')}</ul>
             <div class="buy-row">
-                <button class="buy-btn">BELI SEKARANG</button>
-                <span class="price-label">Rp. ${rank.price.toLocaleString()}</span>
+                <button>BELI</button>
+                <b>Rp ${data.price.toLocaleString()}</b>
             </div>
-        </div>
-    `;
-    rankContainer.appendChild(box);
+        </div>`;
+    container.appendChild(box);
 
-    // Event klik buka/tutup fitur
-    const featuresDiv = box.querySelector('.rank-features');
-    const footerText = box.querySelector('.rank-footer');
-    const priceLabel = box.querySelector('.price-label');
+    box.onclick=e=>{
+        if(e.target.tagName==='BUTTON')return;
+        const f=box.querySelector('.rank-features');
+        const ft=box.querySelector('.rank-footer');
+        f.style.display=f.style.display==='block'?'none':'block';
+        ft.style.display=f.style.display==='block'?'none':'block';
+    };
 
-    box.addEventListener('click', e=>{
-        if(e.target.classList.contains('buy-btn')) return;
-
-        // Toggle fitur rank
-        if(featuresDiv.style.display === 'block') {
-            featuresDiv.style.display = 'none';
-            if(footerText) footerText.style.display = 'block'; // muncul lagi saat fitur ditutup
-            if(priceLabel) priceLabel.style.display = 'inline'; // muncul lagi
-        } else {
-            featuresDiv.style.display = 'block';
-            if(footerText) footerText.style.display = 'none'; // hilang saat fitur dibuka
-            if(priceLabel) priceLabel.style.display = 'none'; // hilang saat fitur dibuka
-        }
-    });
-
-    // Tombol beli
-    const buyBtn = box.querySelector('.buy-btn');
-    buyBtn.addEventListener('click', ()=>{
-        const now = new Date();
-        const dayNames = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
-        const day = dayNames[now.getDay()];
-        const dateStr = `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()}, ${day}, `
-            + `${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')} WIB, `
-            + `${(now.getHours()+1).toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')} WITA, `
-            + `${(now.getHours()+2).toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')} WIT`;
-
-        const text = `----------------BELI RANK-----------------
-Nama Minecraft: ${playerName}
-Tanggal/Tahun: ${dateStr}
-Rank Yang Dibeli: ${rankName}
-Harga: Rp. ${rank.price.toLocaleString()}
---------------------------------------------------`;
-
-        window.open(`https://wa.me/6287780959219?text=${encodeURIComponent(text)}`, '_blank');
-    });
+    box.querySelector('button').onclick=()=>{
+        const text=`BELI RANK\nNama: ${playerName}\nRank: ${name}\nHarga: Rp ${data.price.toLocaleString()}`;
+        window.open(`https://wa.me/6287780959219?text=${encodeURIComponent(text)}`);
+    };
 }
 </script>
 </body>
