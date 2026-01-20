@@ -204,18 +204,30 @@ for(const [name,data] of Object.entries(rankData)){
         </div>`;
     container.appendChild(box);
 
-    box.onclick=e=>{
-        if(e.target.tagName==='BUTTON')return;
-        const f=box.querySelector('.rank-features');
-        const ft=box.querySelector('.rank-footer');
-        f.style.display=f.style.display==='block'?'none':'block';
-        ft.style.display=f.style.display==='block'?'none':'block';
-    };
+    box.querySelector('button').onclick = () => {
+    const now = new Date();
 
-    box.querySelector('button').onclick=()=>{
-        const text=`BELI RANK\nNama: ${playerName}\nRank: ${name}\nHarga: Rp ${data.price.toLocaleString()}`;
-        window.open(`https://wa.me/6287780959219?text=${encodeURIComponent(text)}`);
-    };
+    const timeWIB  = now.toLocaleTimeString('id-ID', { hour:'2-digit', minute:'2-digit' });
+    const timeWITA = new Date(now.getTime()+3600000).toLocaleTimeString('id-ID', { hour:'2-digit', minute:'2-digit' });
+    const timeWIT  = new Date(now.getTime()+7200000).toLocaleTimeString('id-ID', { hour:'2-digit', minute:'2-digit' });
+
+    const text =
+`----------BELI / UPGRADE RANK-----------
+Nama Minecraft: ${playerName}
+Tanggal/Tahun: ${now.toLocaleDateString('id-ID')}
+Waktu:
+- ${timeWIB} WIB
+- ${timeWITA} WITA
+- ${timeWIT} WIT
+Beli Rank: ${rk}
+Harga: Rp. ${d.price.toLocaleString()}
+--------------------------------------------------------`;
+
+    window.open(
+        `https://wa.me/6287780959219?text=${encodeURIComponent(text)}`,
+        '_blank'
+    );
+};
 }
 </script>
 </body>
