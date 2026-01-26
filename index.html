@@ -81,28 +81,7 @@ footer a:hover{text-decoration:underline;}
     </div>
   </div>
 
-  <div class="status" id="mc-status">CHECKING...</div>
-
-<script>
-fetch("https://api.mcsrvstat.us/2/nansmp.net:19227")
-  .then(res => res.json())
-  .then(data => {
-    const el = document.getElementById("mc-status");
-    if (data.online) {
-      el.innerHTML =
-        '<span style="color:#00ff00">ONLINE</span> ' +
-        '<span style="color:#ffffff">• ' +
-        data.players.online + ' / ' + data.players.max +
-        ' Player</span>';
-    } else {
-      el.innerHTML = '<span style="color:red">OFFLINE</span>';
-    }
-  })
-  .catch(() => {
-    document.getElementById("mc-status").innerHTML =
-      '<span style="color:red">OFFLINE</span>';
-  });
-</script>
+  <div class="status">OFFLINE</div>
 
   <div class="card">
     <h3>BEDROCK 🗿</h3>
@@ -223,7 +202,7 @@ document.querySelectorAll('.copy').forEach(el => {
 async function updateServerStatus(){
     const statusEl = document.querySelector('.status');
     try {
-        const res = await fetch('https://api.mcsrvstat.us/bedrock/nansmp.net:12234');
+        const res = await fetch('https://api.mcsrvstat.us/bedrock/nansmp.net:19227');
         const data = await res.json();
         if(data.online){
             const online = data.players?.online || 0;
