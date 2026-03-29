@@ -1,241 +1,381 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NANSMP | Minecraft Server Indonesia</title>
+    
+    <link rel="icon" type="image/jpeg" href="https://i.imgur.com/8oTJsa1.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --cyan: #00ffff;
+            --white: #ffffff;
+            --bg-dark: #050505;
+            --bg-card: rgba(20, 20, 20, 0.6);
+            --text-muted: #aaa;
+            --wa: #25d366;
+            --discord: #5865F2;
+            --glow: 0 0 25px rgba(0, 255, 255, 0.4);
+        }
 
-<title>NanSMP | Server Minecraft Survival Economy</title>
+        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; background: var(--bg-dark); color: white; overflow-x: hidden; line-height: 1.6; }
 
-<meta name="description" content="NanSMP adalah server Minecraft yang bertemakan survival economy! Join sekarang. IP: nansmp.net Port: 19399">
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.05) 0%, transparent 80%);
+            z-index: -1; pointer-events: none;
+        }
 
-<link rel="icon" type="image/jpeg" href="https://i.imgur.com/8oTJsa1.jpeg">
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 6%; background: rgba(0,0,0,0.85);
+            position: fixed; width: 100%; top: 0; z-index: 1000; backdrop-filter: blur(20px);
+            border-bottom: 2px solid var(--cyan); box-shadow: var(--glow);
+        }
+        .nav-logo { display: flex; align-items: center; gap: 12px; font-weight: 900; font-family: 'Montserrat'; font-size: 1.2rem; }
+        .nav-logo img { width: 38px; border-radius: 8px; border: 1px solid var(--cyan); box-shadow: var(--glow); }
+        .menu-btn { font-size: 32px; cursor: pointer; color: var(--cyan); }
 
-<meta property="og:title" content="NanSMP | Minecraft Survival Economy Server">
-<meta property="og:description" content="NanSMP adalah server Minecraft yang bertemakan survival economy! Join sekarang. IP: nansmp.net Port: 19399">
-<meta property="og:image" content="https://i.imgur.com/8oTJsa1.jpeg">
-<meta property="og:type" content="website">
+        .sidebar { 
+            position: fixed; top: 0; right: -100%; width: 320px; height: 100%; 
+            background: #0a0a0a; z-index: 2000; transition: 0.5s cubic-bezier(0.77,0,0.175,1); 
+            padding: 50px 25px; border-left: 3px solid var(--cyan);
+        }
+        .sidebar.active { right: 0; }
+        .sidebar-logo { margin-bottom: 30px; letter-spacing: 2px; font-family: 'Montserrat'; text-align: center; font-size: 1.2rem; font-weight: 900; }
+        .sidebar-btn { 
+            display: block; width: 100%; padding: 14px; margin-bottom: 12px; 
+            border-radius: 12px; text-align: center; text-decoration: none; 
+            font-weight: 700; font-size: 0.85rem; transition: 0.3s; border: none; cursor: pointer;
+        }
+        .btn-side-wa { background: var(--wa); color: white; }
+        .btn-side-dc { background: var(--discord); color: white; }
+        .btn-side-store { background: var(--cyan); color: black; box-shadow: var(--glow); font-weight: 900; }
+        .btn-side-link { background: #1a1a1a; color: white; border: 1px solid #333; }
 
-<link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1500; display: none; }
+        .overlay.active { display: block; }
 
-<style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
-body{background:url('https://i.imgur.com/ZskENbp.jpeg') center/cover no-repeat fixed;min-height:100vh;color:#fff}
-body::before{content:'';position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);z-index:-1}
-.container{max-width:420px;margin:auto;padding:20px}
-.logo{text-align:center;margin-top:30px}
-.logo img{width:110px;border-radius:16px;margin-bottom:10px}
-/* Judul server pakai font Minecraft */
-.title{font-size:30px;text-align:center;font-family:'Minecraft',monospace !important}
-.title span{font-family:'Minecraft',monospace !important;}
-.status{text-align:center;margin:10px 0;color:#ff4444;font-weight:bold}
-.card{background:rgba(0,0,0,.65);border-radius:16px;padding:15px;margin:15px 0}
-.card h3{margin-bottom:8px;font-family:'Minecraft',monospace;font-size:16px;font-weight:normal}
-.ip-row{display:flex;justify-content:space-between;align-items:center;background:#111;padding:10px;border-radius:10px;margin-top:6px}
-.ip-row span{font-size:13px}
-.copy{cursor:pointer}
-.btn{display:block;text-align:center;padding:12px 18px;border-radius:14px;margin:10px auto;font-weight:bold;text-decoration:none;color:#fff;width:80%}
-.btn-add{background:linear-gradient(135deg,#00c6ff,#0072ff);box-shadow:0 6px 16px rgba(0,114,255,.45)}
-.btn-store{background:linear-gradient(135deg,#ffb347,#ff9800);box-shadow:0 6px 16px rgba(255,152,0,.45)}
-.btn-social{display:inline-block;text-align:center;padding:12px 18px;border-radius:14px;margin:8px;font-weight:bold;text-decoration:none;color:#fff;min-width:140px;box-shadow:0 6px 16px rgba(0,0,0,.45);}
-.btn-buy{display:block;text-align:center;padding:12px 18px;border-radius:14px;margin:6px auto;font-weight:bold;text-decoration:none;color:#fff;width:70%}
-.btn-buy.rank{background:linear-gradient(135deg,#ff4b2b,#ff416c)}
-.btn-buy.money{background:linear-gradient(135deg,#00ff00,#008000)}
-.btn-buy.skills{background:linear-gradient(135deg,#ffd700,#ffa500)}
-.section{margin-top:40px}
-.section h2{text-align:center;margin-bottom:15px;font-family:'Minecraft',monospace}
-ul{list-style:none}
-ul li{margin:8px 0;font-size:15px;display:flex;align-items:flex-start}
-ul li span{margin-right:8px}
-.nav{position:fixed;top:15px;right:15px}
-.nav details summary{font-size:24px;cursor:pointer}
-.nav a{display:block;color:#fff;text-decoration:none;margin:8px 0;padding:8px 12px;border-radius:10px;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.25)}
-.fitur, .peraturan{text-align:center;margin:20px auto;max-width:380px;background:rgba(0,0,0,.6);padding:15px;border-radius:16px;box-shadow:0 8px 20px rgba(0,0,0,.4)}
-.fitur ul li, .peraturan ul li{background:rgba(255,255,255,.05);padding:8px 10px;border-radius:8px;margin:6px 0}
-.fitur ul li:hover, .peraturan ul li:hover{background:rgba(255,255,255,.15);}
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), var(--bg-dark)), url('https://i.imgur.com/ZuF8S0e.jpeg') no-repeat center center/cover;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 140px 20px 80px;
+        }
+        .server-tag { background: rgba(0, 255, 255, 0.1); color: var(--cyan); padding: 8px 25px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; margin-bottom: 25px; border: 1px solid var(--cyan); text-transform: uppercase; letter-spacing: 3px; box-shadow: var(--glow); }
+        .hero h1 { font-family: 'Montserrat'; font-size: clamp(3rem, 12vw, 5rem); font-weight: 900; text-transform: uppercase; margin-bottom: 25px; line-height: 1; }
+        .nan-text { color: var(--cyan); text-shadow: var(--glow); }
+        .smp-text { color: var(--white); }
+        .hero .desc-container { max-width: 850px; margin-bottom: 45px; }
+        .hero p { color: #ccc; font-size: 1rem; line-height: 1.8; margin-bottom: 10px; }
+        
+        .hero-btns { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-bottom: 50px; }
+        .btn { padding: 16px 35px; border-radius: 15px; font-weight: 700; text-decoration: none; transition: 0.4s; cursor: pointer; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 10px; border: none; }
+        .btn-main { background: var(--cyan); color: #000; box-shadow: var(--glow); }
+        .btn-wa { background: var(--wa); color: white; }
+        .btn-dc { background: var(--discord); color: white; }
 
-/* Footer style mirip halaman Money */
-footer{
-  background:rgba(0,0,0,0.75);
-  padding:25px 20px;
-  margin-top:40px;
-  border-radius:16px;
-  text-align:center;
-  font-size:14px;
-  color:#fff;
-}
-footer p{margin:6px 0;}
-footer a{color:#00bfff;text-decoration:none;font-weight:bold;margin:0 5px;}
-footer a:hover{text-decoration:underline;}
-</style>
+        .stats-grid { display: flex; gap: 20px; width: 100%; max-width: 1000px; flex-wrap: wrap; justify-content: center; }
+        .stat-card { background: rgba(255, 255, 255, 0.03); padding: 30px; border-radius: 25px; flex: 1; min-width: 260px; border: 1px solid rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); transition: 0.3s; }
+        .stat-card h4 { font-size: 2.5rem; font-family: 'Montserrat'; font-weight: 900; color: white; margin-bottom: 5px; }
+        .stat-card p { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; }
+
+        .bc-hero { 
+            margin-top: 40px; background: rgba(0, 255, 255, 0.05); border: 2px solid var(--cyan); 
+            padding: 20px 40px; border-radius: 50px; display: none; max-width: 900px; width: 90%;
+            animation: pulse-glow 2s infinite; backdrop-filter: blur(10px);
+        }
+
+        .section { padding: 100px 8%; max-width: 1200px; margin: auto; text-align: center; }
+        .section-title { font-family: 'Montserrat'; font-size: 2.5rem; font-weight: 900; margin-bottom: 50px; text-transform: uppercase; letter-spacing: 3px; position: relative; }
+        .section-title::after { content: ""; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background: var(--cyan); box-shadow: var(--glow); }
+        
+        /* PORTAL & IP (UKURAN DIPERBAIKI) */
+        .portal-card { background: var(--bg-card); border-radius: 40px; padding: 50px; border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 50px; flex-wrap: wrap; text-align: left; backdrop-filter: blur(10px); }
+        .portal-logo img { width: 180px; border-radius: 30px; border: 4px solid var(--cyan); box-shadow: var(--glow); }
+        .portal-info { flex: 1; min-width: 280px; }
+        .ip-row { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 20px 30px; background: rgba(0,0,0,0.6); border-radius: 20px; margin-bottom: 15px;
+            cursor: pointer; transition: 0.3s; border: 1px solid rgba(255,255,255,0.05);
+        }
+        .ip-row:hover { border-color: var(--cyan); background: rgba(0, 255, 255, 0.08); }
+        .ip-row span { color: var(--text-muted); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .ip-row strong { color: white; font-family: 'Montserrat'; letter-spacing: 1px; font-size: 1.1rem; }
+
+        .chat-container { margin-top: 40px; border-radius: 40px; overflow: hidden; border: 2px solid rgba(0, 255, 255, 0.3); height: 550px; box-shadow: var(--glow); }
+
+        .list-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 35px; margin-top: 50px; }
+        .card-list { background: var(--bg-card); padding: 45px; border-radius: 40px; text-align: left; border: 1px solid rgba(255,255,255,0.05); }
+        .card-list h3 { color: var(--cyan); margin-bottom: 35px; font-size: 1.4rem; font-family: 'Montserrat'; border-left: 5px solid var(--cyan); padding-left: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        .card-list li { margin-bottom: 22px; display: flex; gap: 20px; align-items: flex-start; }
+        .icon-sq { min-width: 42px; height: 42px; background: rgba(0, 255, 255, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; border: 1px solid rgba(0, 255, 255, 0.2); }
+        .list-text b { display: block; color: white; font-size: 1rem; margin-bottom: 4px; }
+        .list-text span { color: var(--text-muted); font-size: 0.85rem; display: block; line-height: 1.5; }
+
+        .store-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-top: 30px; }
+        .store-card { background: linear-gradient(145deg, #111, #080808); padding: 60px 40px; border-radius: 40px; border: 1px solid rgba(255,255,255,0.05); transition: 0.5s; text-align: center; }
+        .store-card h3 { font-family: 'Montserrat'; font-size: 1.8rem; margin-bottom: 20px; color: var(--cyan); }
+
+        /* GALLERY KEMBALI */
+        .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 40px; }
+        .gallery-item { border-radius: 35px; overflow: hidden; height: 320px; border: 3px solid rgba(255,255,255,0.05); transition: 0.3s; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-item:hover { border-color: var(--cyan); box-shadow: var(--glow); }
+
+        footer { padding: 100px 8% 50px; text-align: center; background: #030303; border-top: 2px solid var(--cyan); }
+        .footer-logo { font-size: 1.8rem; font-weight: 900; margin-bottom: 25px; font-family: 'Montserrat'; }
+        footer a { color: var(--cyan); text-decoration: none; font-weight: 600; }
+
+        @media (max-width: 768px) {
+            .list-grid, .gallery-grid { grid-template-columns: 1fr; }
+            .portal-card { flex-direction: column; text-align: center; padding: 40px 20px; }
+            .hero h1 { font-size: 3rem; }
+            .hero-btns { flex-direction: column; width: 100%; }
+            .btn { width: 100%; justify-content: center; }
+        }
+    </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<div class="nav">
-<details>
-<summary>☰</summary>
-<a href="#home">🏠 Home</a>
-<a href="https://whatsapp.com/channel/0029VaqnH97L7UVWBeMAyX2I">📱 WhatsApp</a>
-<a href="https://discord.gg/4KPhCnvQyf">💬 Discord</a>
-<a href="#store">🛒 Store</a>
-<a href="https://minecraft-mp.com/server-s350156">🗳️ Vote</a>
-<a href="syarat-ketentuan.html">📄 Syarat & Ketentuan</a>
-</details>
-</div>
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
-<div class="container" id="home">
-  <div class="logo">
-    <img src="https://i.imgur.com/8oTJsa1.jpeg" alt="NanSMP Logo">
-    <div class="title">
-      <span class="nan" style="color:#00bfff">NAN</span><span class="smp" style="color:#ffffff">SMP</span>
-      <span style="color:#9e9e9e"> | </span>
-      <span class="server" style="color:#ffffff">MINECRAFT SERVER</span>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-logo"><span class="nan-text">NAN</span><span class="smp-text">SMP</span></div>
+        <a href="#home" class="sidebar-btn btn-side-link" onclick="toggleSidebar()">🏠 BERANDA</a>
+        <a href="#portal" class="sidebar-btn btn-side-link" onclick="toggleSidebar()">🌐 KONEKSI SERVER</a>
+        <a href="#store" class="sidebar-btn btn-side-store" onclick="toggleSidebar()">🛒 STORE SERVER</a>
+        <a href="https://whatsapp.com/channel/0029VaqnH97L7UVWBeMAyX2I" target="_blank" class="sidebar-btn btn-side-wa">💚 SALURAN WHATSAPP</a>
+        <a href="https://discord.gg/4KPhCnvQyf" target="_blank" class="sidebar-btn btn-side-dc">💎 JOIN DISCORD</a>
+        
+        <hr style="margin: 40px 0; opacity: 0.05;">
+        
+        <div id="loginArea">
+            <input type="password" id="pass" placeholder="Staff Passkey" style="width:100%; padding:15px; background:#111; border:1px solid #222; color:white; border-radius: 15px; margin-bottom: 15px;">
+            <button onclick="login()" class="sidebar-btn" style="background: var(--cyan); color: black; font-weight: 900;">STAFF LOGIN</button>
+        </div>
+        <div id="staffCtrl" style="display:none;">
+            <textarea id="msg" placeholder="Write broadcast message..." style="width:100%; height:100px; background:#111; color:white; border:1px solid var(--cyan); padding:15px; border-radius:15px; margin-bottom:15px;"></textarea>
+            <div style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                <input type="checkbox" id="maintMode" onchange="toggleMaint()"> 
+                <label for="maintMode" style="cursor:pointer">Maintenance Mode</label>
+            </div>
+            <button onclick="saveInfo()" class="sidebar-btn" style="background: var(--cyan); color: black;">PUSH INFO</button>
+            <button onclick="logout()" class="sidebar-btn" style="background: #ff3e3e; color: white;">LOGOUT</button>
+        </div>
     </div>
-  </div>
 
-  <div class="status">CHECKING.....</div>
+    <nav>
+        <div class="nav-logo">
+            <img src="https://i.imgur.com/8oTJsa1.jpeg">
+            <span><span class="nan-text">NAN</span><span class="smp-text">SMP</span></span>
+        </div>
+        <div class="menu-btn" onclick="toggleSidebar()">☰</div>
+    </nav>
 
-  <div class="card">
-    <h3>BEDROCK 🗿</h3>
-    <div class="ip-row"><span>IP / Address</span><span class="copy">nansmp.net 📋</span></div>
-    <div class="ip-row"><span>Port</span><span class="copy">19132 📋</span></div>
-  </div>
+    <section class="hero" id="home">
+        <div class="server-tag">Minecraft Indonesia</div>
+        <h1>SERVER MINECRAFT <span class="nan-text">NAN</span><span class="smp-text">SMP</span></h1>
+        
+        <div class="desc-container">
+            <p><strong>NANSMP</strong></p>
+            <p>NanSMP adalah server Minecraft Indonesia dengan tema Survival Economy yang seru dan kompetitif. Di sini kamu bisa bermain, berkembang, dan bersaing bersama player lain dalam sistem ekonomi yang menarik.</p>
+            <p>Kata "SMP" merupakan singkatan dari Survival Multiplayer, di mana petualangan dimulai bersama komunitas.</p>
+        </div>
+        
+        <div class="hero-btns">
+            <a href="minecraft://?addExternalServer=NanSMP|nansmp.net:19132" class="btn btn-main" id="joinBtn">🎮 MAIN SEKARANG</a>
+            <a href="https://whatsapp.com/channel/0029VaqnH97L7UVWBeMAyX2I" target="_blank" class="btn btn-wa">💚 SALURAN WA</a>
+            <a href="https://discord.gg/4KPhCnvQyf" target="_blank" class="btn btn-dc">💎 JOIN DISCORD</a>
+        </div>
 
-  <div class="card">
-    <h3>JAVA ☁</h3>
-    <div class="ip-row"><span>IP / Address</span><span class="copy">nansmp.net 📋</span></div>
-  </div>
-</div>
+        <div class="stats-grid">
+            <div class="stat-card"><h4 id="playerStatus">0</h4><p>Players Active</p></div>
+            <div class="stat-card"><h4>1.21+</h4><p>Server Version</p></div>
+            <div class="stat-card"><h4>JAVA & BE</h4><p>Cross Platform</p></div>
+        </div>
 
-<!-- Tombol ADD SERVER & STORE -->
-<a class="btn btn-add" href="minecraft://?addExternalServer=NanSMP|nansmp.net:19132" target="_blank">🎮 ADD SERVER</a>
-<a class="btn btn-store" href="#store">🛒 STORE</a>
+        <div class="bc-hero" id="infoBox">
+            <p id="infoTxt" style="font-weight: 700; font-size: 1.2rem; color: white; letter-spacing: 1px;"></p>
+        </div>
+    </section>
 
-<!-- Socials -->
-<h2 style="font-family:'Minecraft',monospace;text-align:center;margin-top:30px">🌐 SOCIALS</h2>
-<div style="text-align:center;">
-  <a class="btn btn-social" style="background:linear-gradient(135deg,#25D366,#128C7E)" href="https://whatsapp.com/channel/0029VaqnH97L7UVWBeMAyX2I">📱 WhatsApp</a>
-  <a class="btn btn-social" style="background:linear-gradient(135deg,#5865F2,#404EED)" href="https://discord.gg/4KPhCnvQyf">💬 Discord</a>
-  <a class="btn btn-social" style="background:linear-gradient(135deg,#ff512f,#f09819)" href="https://minecraft-mp.com/server-s350156">🗳️ Vote Server</a>
-</div>
+    <section class="section" id="portal">
+        <h2 class="section-title">PORTAL KONEKSI</h2>
+        <div class="portal-card">
+            <div class="portal-logo"><img src="https://i.imgur.com/8oTJsa1.jpeg"></div>
+            <div class="portal-info">
+                <div class="ip-row copy-el">
+                    <span>SERVER IP</span>
+                    <strong>nansmp.net 📋</strong>
+                </div>
+                <div class="ip-row copy-el">
+                    <span>PORT</span>
+                    <strong>19132 📋</strong>
+                </div>
+                <div class="ip-row"><span>VERSI BEDROCK</span><strong>1.21.130 - Latest</strong></div>
+                <div class="ip-row"><span>VERSI JAVA</span><strong>All Versions</strong></div>
+                <a href="minecraft://?addExternalServer=NanSMP|nansmp.net:19132" class="btn btn-main" style="width: 100%; justify-content: center; margin-top: 25px; border-radius: 18px;">Tambahkan Ke Minecraft</a>
+            </div>
+        </div>
 
-<!-- Fitur server -->
-<div class="fitur">
-<h3 style="font-family:'Minecraft',monospace">✨ FITUR SERVER NANSMP</h3>
-<ul>
-<li><span>🎯</span>Survival - Bertahan hidup dan membangun dunia kamu</li>
-<li><span>🎰</span>Gacha - Dapatkan item menarik setiap hari</li>
-<li><span>⚔️</span>PvP Area - Bertarung dengan player lain</li>
-<li><span>🏝️</span>AFK Area - Tempat aman untuk AFK</li>
-<li><span>⛏️</span>Mining Sim - Tempat untuk mining
-<li><span>🏦</span>Auction House - Jual beli item antar player</li>
-<li><span>🎁</span>Kits - Dapatkan perlengkapan setiap hari</li>
-<li><span>🛒</span>Shop - Membeli item dan blok</li>
-<li><span>💎</span>Rank - Upgrade rank server kamu</li>
-<li><span>💰</span>Money - Untuk menjual beli item</li>
-<li><span>🗺️</span>Claim Land - Klaim area kamu agar tidak di grief</li>
-<li><span>🛡️</span>Skills - Tingkatkan kemampuan player</li>
-<Li><span>🔮</span>Smart Spawner - Spawner otomatis & cepat</li>
-<Li><span>🏆</span>Rewards - Hadiah selama bermain di server</li>
-<li><span>🌐</span>Support Java & Bedrock</li>
-</ul>
-</div>
+        <div class="chat-container">
+            <iframe src="https://e.widgetbot.io/channels/1314922741778092113/1429719368513622197" height="100%" width="100%" frameborder="0"></iframe>
+        </div>
 
-<!-- Peraturan server -->
-<div class="peraturan">
-<h3 style="font-family:'Minecraft',monospace">📢 PERATURAN / RULES</h3>
-<ul>
-<li><span>❌</span>NO PROMOSI / SPAM</li>
-<li><span>🔞</span>NO 18+</li>
-<li><span>💢</span>NO TOXIC BERLEBIHAN</li>
-<li><span>🚫</span>NO BULLYING</li>
-<li><span>🛑</span>NO CHEAT / RUSUH</li>
-<li><span>⚠️</span>NO PROVOKASI</li>
-<li><span>🧠</span>JAGA NAMA BAIK SERVER</li>
-<li><span>🫱</span>GUNAKAN AKAL SEHAT</li>
-<li><span>🤝</span>SOPAN</li>
-<li><span>🙏</span>NO MENGHINA AGAMA</li>
-<li><span>❗</span>Melanggar? Ban/banip/kick</li>
-</ul>
-<p>NanSMP adalah server minecraft INDONESIA yang bertemakan ECONOMY!</p>
-</div>
+        <div class="list-grid">
+            <div class="card-list">
+                <h3>📜 PERATURAN SERVER</h3>
+                <ul>
+                    <li><div class="icon-sq">❌</div><div class="list-text"><b>NO PROMOSI / SPAM</b><span>Dilarang keras iklan server lain atau spam chat.</span></div></li>
+                    <li><div class="icon-sq">🔞</div><div class="list-text"><b>NO 18+</b><span>Konten dewasa dilarang keras di seluruh area.</span></div></li>
+                    <li><div class="icon-sq">💢</div><div class="list-text"><b>NO TOXIC</b><span>Jaga lisan, dilarang berkata kasar atau menghina.</span></div></li>
+                    <li><div class="icon-sq">🚫</div><div class="list-text"><b>NO BULLYING</b><span>Dilarang merundung pemain lain dalam bentuk apapun.</span></div></li>
+                    <li><div class="icon-sq">🛑</div><div class="list-text"><b>NO CHEAT / RUSUH</b><span>Gunakan client murni, dilarang merusak bangunan.</span></div></li>
+                    <li><div class="icon-sq">⚠️</div><div class="list-text"><b>NO PROVOKASI</b><span>Dilarang memicu keributan antar pemain atau staff.</span></div></li>
+                    <li><div class="icon-sq">🧠</div><div class="list-text"><b>JAGA NAMA BAIK SERVER</b><span>Bawa nama NanSMP dengan positif di manapun.</span></div></li>
+                    <li><div class="icon-sq">🤝</div><div class="list-text"><b>SOPAN</b><span>Hargai sesama pemain dan staff yang bertugas.</span></div></li>
+                    <li><div class="icon-sq">🙏</div><div class="list-text"><b>NO HINA AGAMA</b><span>Toleransi tinggi, dilarang membawa unsur SARA.</span></div></li>
+                </ul>
+            </div>
 
-<!-- NANSMP STORE -->
-<div class="section" id="store">
-<h2 style="font-family:'Minecraft',monospace;text-align:center">🛒 NANSMP STORE</h2>
-<a class="btn btn-buy rank" href="login.html?to=rank">💎 Beli Rank</a>
-<a class="btn btn-buy money" href="login.html?to=money">💰 Beli Money</a>
-<a class="btn btn-buy skills" href="login.html?to=skills">🛡️ Beli Skills</a>
-</div>
+            <div class="card-list">
+                <h3>✨ FITUR UNGGULAN</h3>
+                <ul>
+                    <li><div class="icon-sq">🎯</div><div class="list-text"><b>Survival</b><span>Bertahan hidup dan membangun dunia kamu.</span></div></li>
+                    <li><div class="icon-sq">🎰</div><div class="list-text"><b>Gacha Crates</b><span>Dapatkan item menarik setiap hari.</span></div></li>
+                    <li><div class="icon-sq">⚔️</div><div class="list-text"><b>PvP Area</b><span>Bertarung dengan player lain.</span></div></li>
+                    <li><div class="icon-sq">🏝️</div><div class="list-text"><b>AFK Area</b><span>Tempat aman untuk AFK.</span></div></li>
+                    <li><div class="icon-sq">⛏️</div><div class="list-text"><b>Mining Sim</b><span>Tempat khusus untuk mining.</span></div></li>
+                    <li><div class="icon-sq">🏦</div><div class="list-text"><b>Auction House</b><span>Jual beli item antar player.</span></div></li>
+                    <li><div class="icon-sq">🎁</div><div class="list-text"><b>Kits</b><span>Dapatkan perlengkapan setiap hari.</span></div></li>
+                    <li><div class="icon-sq">🛒</div><div class="list-text"><b>Shop</b><span>Membeli item dan blok melalui toko.</span></div></li>
+                    <li><div class="icon-sq">💎</div><div class="list-text"><b>Rank System</b><span>Upgrade rank server kamu.</span></div></li>
+                    <li><div class="icon-sq">💰</div><div class="list-text"><b>Money</b><span>Untuk menjual beli item.</span></div></li>
+                    <li><div class="icon-sq">🗺️</div><div class="list-text"><b>Claim Land</b><span>Klaim area kamu agar tidak di grief.</span></div></li>
+                    <li><div class="icon-sq">🛡️</div><div class="list-text"><b>Skills</b><span>Tingkatkan kemampuan player.</span></div></li>
+                    <li><div class="icon-sq">🔮</div><div class="list-text"><b>Smart Spawner</b><span>Spawner otomatis & cepat.</span></div></li>
+                    <li><div class="icon-sq">🏆</div><div class="list-text"><b>Rewards</b><span>Hadiah selama bermain di server.</span></div></li>
+                    <li><div class="icon-sq">🌐</div><div class="list-text"><b>Support Java & Bedrock</b><span>Main di perangkat manapun.</span></div></li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-<!-- Footer -->
-<footer>
-  <p>© NanSMP, All rights reserved</p>
-  <p>
-    <a href="syarat-ketentuan.html">Syarat & Ketentuan</a> |
-    <a href="https://discord.gg/4KPhCnvQyf">Discord</a> |
-    <a href="https://whatsapp.com/channel/0029VaqnH97L7UVWBeMAyX2I">WhatsApp</a>
-  </p>
-  <p><a href="https://store.nansmp.net" target="_blank">store.nansmp.net</a></p>
-  <p style="color:#ccc;font-size:12px;margin-top:6px;">
-    NanSMP tidak berafiliasi dengan Mojang Studios atau Microsoft.
-  </p>
-</footer>
+    <section class="section" id="store">
+        <h2 class="section-title">OFFICIAL STORE</h2>
+        <div class="store-grid">
+            <div class="store-card"><h3>💎 RANK</h3><p style="color:var(--text-muted); margin-bottom:20px;">Dapatkan pangkat mewah & fitur eksklusif server.</p><a href="login.html?to=rank" class="btn btn-main btn-buy">BELI SEKARANG</a></div>
+            <div class="store-card"><h3>💰 MONEY</h3><p style="color:var(--text-muted); margin-bottom:20px;">Tambah Money instan di dalam game.</p><a href="login.html?to=money" class="btn btn-main btn-buy">TOPUP MONEY</a></div>
+            <div class="store-card"><h3>🛡️ SKILLS</h3><p style="color:var(--text-muted); margin-bottom:20px;">Tingkatkan level skill karaktermu secara instan.</p><a href="login.html?to=skills" class="btn btn-main btn-buy">BELI SKILL</a></div>
+        </div>
+    </section>
 
-<!-- SCRIPT -->
-<script>
-// Smooth scroll untuk tombol STORE
-document.querySelectorAll('.btn-store').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const storeSection = document.getElementById('store');
-        storeSection.scrollIntoView({ behavior: 'smooth' });
-    });
-});
+    <section class="section" id="gallery">
+        <h2 class="section-title">GALLERY SERVER</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://i.imgur.com/ZuF8S0e.jpeg"></div>
+            <div class="gallery-item"><img src="https://i.imgur.com/3pK5xv6.jpeg"></div>
+            <div class="gallery-item"><img src="https://i.imgur.com/ZskENbp.jpeg"></div>
+        </div>
+    </section>
 
-// Tombol Beli langsung ke login
-document.querySelectorAll('.btn-buy').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const href = btn.getAttribute('href');
-        window.location.href = href; // redirect ke login.html?to=...
-    });
-});
+    <footer>
+      <div class="footer-logo">NAN<span style="color:var(--cyan)">SMP</span></div>
+      <p style="color: #666; font-size: 0.9rem; max-width: 600px; margin: 0 auto 30px;">Server Minecraft Survival Economy Indonesia.</p>
+      <div style="margin-bottom: 30px;">
+        <a href="syarat-ketentuan.html">Syarat & Ketentuan</a> |
+        <a href="https://discord.gg/4KPhCnvQyf">Discord</a> |
+        <a href="https://whatsapp.com/channel/0029VaqnH97L7UVWBeMAyX2I">WhatsApp</a>
+      </div>
+      <p style="font-size: 0.75rem; color: #444;">© 2024 - 2026 NANSMP Network.</p>
+    </footer>
 
-// Tombol copy IP
-document.querySelectorAll('.copy').forEach(el => {
-    el.addEventListener('click', () => {
-        const text = el.textContent.replace(' 📋','');
-        navigator.clipboard.writeText(text).then(() => {
-            alert('IP disalin: ' + text);
+    <script>
+    const isStaff = localStorage.getItem('n_staff') === 'true';
+
+    async function updateStatus(){
+      const el = document.getElementById('playerStatus');
+      const joinBtn = document.getElementById('joinBtn');
+      const isMaint = localStorage.getItem('n_maint') === 'true';
+
+      try {
+        const res = await fetch('https://api.mcsrvstat.us/2/nansmp.net');
+        const data = await res.json();
+
+        if (isMaint) {
+            el.innerHTML = '<span style="color:#ffa500">MAINTENANCE</span>';
+            if (!isStaff) {
+                joinBtn.style.pointerEvents = 'none';
+                joinBtn.style.opacity = '0.5';
+                joinBtn.innerText = '🔒 STAFF ONLY';
+            }
+        } else if (data.online) {
+            el.innerText = data.players.online;
+            joinBtn.style.pointerEvents = 'auto';
+            joinBtn.style.opacity = '1';
+            joinBtn.innerText = '🎮 MAIN SEKARANG';
+        } else {
+            el.innerHTML = '<span style="color:#ff4444">OFFLINE</span>';
+        }
+      } catch (e) {
+        el.innerHTML = '<span style="color:#ff4444">OFFLINE</span>';
+      }
+    }
+
+    document.querySelectorAll('.copy-el').forEach(el => {
+        el.addEventListener('click', () => {
+            const strong = el.querySelector('strong');
+            const text = strong.textContent.replace(' 📋','');
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Tersalin: ' + text);
+            });
         });
     });
-});
 
-// --- SERVER STATUS BEDROCK PORT 19227 ---
-async function updateServerStatus(){
-  const el = document.querySelector('.status');
-  try {
-    const res = await fetch('https://api.mcsrvstat.us/2/nansmp.net');
-    const data = await res.json();
-
-    if (data.online) {
-      el.innerHTML =
-        '<span style="color:#00ff00">ONLINE</span>' +
-        '<span style="color:#ffffff"> • ' +
-        data.players.online + ' / ' + data.players.max +
-        ' Player</span>';
-    } else {
-      el.innerHTML = '<span style="color:#ff4444">OFFLINE</span>';
+    function toggleSidebar() { 
+        document.getElementById('sidebar').classList.toggle('active'); 
+        document.getElementById('overlay').classList.toggle('active'); 
     }
-  } catch (e) {
-    el.innerHTML = '<span style="color:#ff4444">OFFLINE</span>';
-  }
-}
+    function login() { 
+        if(document.getElementById('pass').value === "nansmp@jshyea_$server") { 
+            localStorage.setItem('n_staff', 'true'); 
+            location.reload(); 
+        } else { alert('Akses Ditolak!'); } 
+    }
+    function logout() { localStorage.removeItem('n_staff'); location.reload(); }
+    function toggleMaint() {
+        const check = document.getElementById('maintMode').checked;
+        localStorage.setItem('n_maint', check ? 'true' : 'false');
+    }
+    function saveInfo() { 
+        localStorage.setItem('n_info', document.getElementById('msg').value); 
+        renderInfo(); alert('Updated!'); 
+    }
+    function renderInfo() { 
+        const info = localStorage.getItem('n_info'); 
+        if(info) { 
+            document.getElementById('infoBox').style.display = 'block'; 
+            document.getElementById('infoTxt').innerText = "📢 BROADCAST: " + info; 
+        } 
+    }
 
-updateServerStatus();
-setInterval(updateServerStatus, 15000);
-</script>
+    if(isStaff) { 
+        document.getElementById('loginArea').style.display = 'none'; 
+        document.getElementById('staffCtrl').style.display = 'block'; 
+        document.getElementById('maintMode').checked = localStorage.getItem('n_maint') === 'true';
+    }
+    renderInfo();
+    updateStatus();
+    setInterval(updateStatus, 15000);
+    </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer>
+      new Crate({ server: '1314922741778092113', channel: '1429719368513622197', glyph: ['https://i.imgur.com/8oTJsa1.jpeg', '100%'], color: '#00ffff' })
+    </script>
 </body>
-  </html>
+</html>
