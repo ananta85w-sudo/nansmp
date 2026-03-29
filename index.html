@@ -93,18 +93,19 @@
         .section-title { font-family: 'Montserrat'; font-size: 2.5rem; font-weight: 900; margin-bottom: 50px; text-transform: uppercase; letter-spacing: 3px; position: relative; }
         .section-title::after { content: ""; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background: var(--cyan); box-shadow: var(--glow); }
         
-        /* PORTAL & IP (UKURAN DIPERBAIKI) */
         .portal-card { background: var(--bg-card); border-radius: 40px; padding: 50px; border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 50px; flex-wrap: wrap; text-align: left; backdrop-filter: blur(10px); }
         .portal-logo img { width: 180px; border-radius: 30px; border: 4px solid var(--cyan); box-shadow: var(--glow); }
         .portal-info { flex: 1; min-width: 280px; }
+
+        /* TEKS IP DIPERKECIL SESUAI REQ */
         .ip-row { 
             display: flex; justify-content: space-between; align-items: center; 
-            padding: 20px 30px; background: rgba(0,0,0,0.6); border-radius: 20px; margin-bottom: 15px;
+            padding: 16px 25px; background: rgba(0,0,0,0.6); border-radius: 20px; margin-bottom: 12px;
             cursor: pointer; transition: 0.3s; border: 1px solid rgba(255,255,255,0.05);
         }
         .ip-row:hover { border-color: var(--cyan); background: rgba(0, 255, 255, 0.08); }
-        .ip-row span { color: var(--text-muted); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
-        .ip-row strong { color: white; font-family: 'Montserrat'; letter-spacing: 1px; font-size: 1.1rem; }
+        .ip-row span { color: var(--text-muted); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .ip-row strong { color: white; font-family: 'Montserrat'; letter-spacing: 1px; font-size: 0.85rem; }
 
         .chat-container { margin-top: 40px; border-radius: 40px; overflow: hidden; border: 2px solid rgba(0, 255, 255, 0.3); height: 550px; box-shadow: var(--glow); }
 
@@ -120,7 +121,6 @@
         .store-card { background: linear-gradient(145deg, #111, #080808); padding: 60px 40px; border-radius: 40px; border: 1px solid rgba(255,255,255,0.05); transition: 0.5s; text-align: center; }
         .store-card h3 { font-family: 'Montserrat'; font-size: 1.8rem; margin-bottom: 20px; color: var(--cyan); }
 
-        /* GALLERY KEMBALI */
         .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 40px; }
         .gallery-item { border-radius: 35px; overflow: hidden; height: 320px; border: 3px solid rgba(255,255,255,0.05); transition: 0.3s; }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
@@ -188,7 +188,7 @@
         </div>
         
         <div class="hero-btns">
-            <a href="minecraft://?addExternalServer=NanSMP|nansmp.net:19132" class="btn btn-main" id="joinBtn">🎮 MAIN SEKARANG</a>
+            <a href="#portal" class="btn btn-main" id="joinBtn">🎮 MAIN SEKARANG</a>
             <a href="https://whatsapp.com/channel/0029VaqnH97L7UVWBeMAyX2I" target="_blank" class="btn btn-wa">💚 SALURAN WA</a>
             <a href="https://discord.gg/4KPhCnvQyf" target="_blank" class="btn btn-dc">💎 JOIN DISCORD</a>
         </div>
@@ -246,21 +246,18 @@
             <div class="card-list">
                 <h3>✨ FITUR UNGGULAN</h3>
                 <ul>
-                    <li><div class="icon-sq">🎯</div><div class="list-text"><b>Survival</b><span>Bertahan hidup dan membangun dunia kamu.</span></div></li>
-                    <li><div class="icon-sq">🎰</div><div class="list-text"><b>Gacha Crates</b><span>Dapatkan item menarik setiap hari.</span></div></li>
+                    <li><div class="icon-sq">🎯</div><div class="list-text"><b>Survival</b><span>Survival Economy seru.</span></div></li>
+                    <li><div class="icon-sq">🎰</div><div class="list-text"><b>Gacha Crates</b><span>Dapatkan item menarik.</span></div></li>
                     <li><div class="icon-sq">⚔️</div><div class="list-text"><b>PvP Area</b><span>Bertarung dengan player lain.</span></div></li>
                     <li><div class="icon-sq">🏝️</div><div class="list-text"><b>AFK Area</b><span>Tempat aman untuk AFK.</span></div></li>
                     <li><div class="icon-sq">⛏️</div><div class="list-text"><b>Mining Sim</b><span>Tempat khusus untuk mining.</span></div></li>
-                    <li><div class="icon-sq">🏦</div><div class="list-text"><b>Auction House</b><span>Jual beli item antar player.</span></div></li>
-                    <li><div class="icon-sq">🎁</div><div class="list-text"><b>Kits</b><span>Dapatkan perlengkapan setiap hari.</span></div></li>
-                    <li><div class="icon-sq">🛒</div><div class="list-text"><b>Shop</b><span>Membeli item dan blok melalui toko.</span></div></li>
-                    <li><div class="icon-sq">💎</div><div class="list-text"><b>Rank System</b><span>Upgrade rank server kamu.</span></div></li>
-                    <li><div class="icon-sq">💰</div><div class="list-text"><b>Money</b><span>Untuk menjual beli item.</span></div></li>
-                    <li><div class="icon-sq">🗺️</div><div class="list-text"><b>Claim Land</b><span>Klaim area kamu agar tidak di grief.</span></div></li>
-                    <li><div class="icon-sq">🛡️</div><div class="list-text"><b>Skills</b><span>Tingkatkan kemampuan player.</span></div></li>
-                    <li><div class="icon-sq">🔮</div><div class="list-text"><b>Smart Spawner</b><span>Spawner otomatis & cepat.</span></div></li>
-                    <li><div class="icon-sq">🏆</div><div class="list-text"><b>Rewards</b><span>Hadiah selama bermain di server.</span></div></li>
-                    <li><div class="icon-sq">🌐</div><div class="list-text"><b>Support Java & Bedrock</b><span>Main di perangkat manapun.</span></div></li>
+                    <li><div class="icon-sq">🏦</div><div class="list-text"><b>Auction House</b><span>Jual beli item player.</span></div></li>
+                    <li><div class="icon-sq">🎁</div><div class="list-text"><b>Kits</b><span>Dapatkan perlengkapan harian.</span></div></li>
+                    <li><div class="icon-sq">🛒</div><div class="list-text"><b>Shop</b><span>Membeli item di toko.</span></div></li>
+                    <li><div class="icon-sq">💎</div><div class="list-text"><b>Rank System</b><span>Upgrade rank kamu.</span></div></li>
+                    <li><div class="icon-sq">💰</div><div class="list-text"><b>Money</b><span>Ekonomi di dalam game.</span></div></li>
+                    <li><div class="icon-sq">🗺️</div><div class="list-text"><b>Claim Land</b><span>Klaim area kamu.</span></div></li>
+                    <li><div class="icon-sq">🛡️</div><div class="list-text"><b>Skills</b><span>Tingkatkan kemampuan.</span></div></li>
                 </ul>
             </div>
         </div>
@@ -269,9 +266,9 @@
     <section class="section" id="store">
         <h2 class="section-title">OFFICIAL STORE</h2>
         <div class="store-grid">
-            <div class="store-card"><h3>💎 RANK</h3><p style="color:var(--text-muted); margin-bottom:20px;">Dapatkan pangkat mewah & fitur eksklusif server.</p><a href="login.html?to=rank" class="btn btn-main btn-buy">BELI SEKARANG</a></div>
-            <div class="store-card"><h3>💰 MONEY</h3><p style="color:var(--text-muted); margin-bottom:20px;">Tambah Money instan di dalam game.</p><a href="login.html?to=money" class="btn btn-main btn-buy">TOPUP MONEY</a></div>
-            <div class="store-card"><h3>🛡️ SKILLS</h3><p style="color:var(--text-muted); margin-bottom:20px;">Tingkatkan level skill karaktermu secara instan.</p><a href="login.html?to=skills" class="btn btn-main btn-buy">BELI SKILL</a></div>
+            <div class="store-card"><h3>💎 RANK</h3><p>Dapatkan pangkat mewah & fitur eksklusif server.</p><a href="login.html?to=rank" class="btn btn-main btn-buy">BELI SEKARANG</a></div>
+            <div class="store-card"><h3>💰 MONEY</h3><p>Tambah Money instan di dalam game.</p><a href="login.html?to=money" class="btn btn-main btn-buy">TOPUP MONEY</a></div>
+            <div class="store-card"><h3>🛡️ SKILLS</h3><p>Tingkatkan level skill karaktermu secara instan.</p><a href="login.html?to=skills" class="btn btn-main btn-buy">BELI SKILL</a></div>
         </div>
     </section>
 
@@ -286,7 +283,7 @@
 
     <footer>
       <div class="footer-logo">NAN<span style="color:var(--cyan)">SMP</span></div>
-      <p style="color: #666; font-size: 0.9rem; max-width: 600px; margin: 0 auto 30px;">Server Minecraft Survival Economy Indonesia.</p>
+      <p>Server Minecraft Survival Economy Indonesia.</p>
       <div style="margin-bottom: 30px;">
         <a href="syarat-ketentuan.html">Syarat & Ketentuan</a> |
         <a href="https://discord.gg/4KPhCnvQyf">Discord</a> |
@@ -326,6 +323,15 @@
         el.innerHTML = '<span style="color:#ff4444">OFFLINE</span>';
       }
     }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
 
     document.querySelectorAll('.copy-el').forEach(el => {
         el.addEventListener('click', () => {
@@ -373,7 +379,6 @@
     updateStatus();
     setInterval(updateStatus, 15000);
     </script>
-
     <script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer>
       new Crate({ server: '1314922741778092113', channel: '1429719368513622197', glyph: ['https://i.imgur.com/8oTJsa1.jpeg', '100%'], color: '#00ffff' })
     </script>
