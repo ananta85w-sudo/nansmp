@@ -288,7 +288,7 @@
     async function updateStatus(){
       const el = document.getElementById('playerStatus');
       try {
-        const res = await fetch('https://api.mcsrvstat.us/2/185.207.166.237:19032');
+        const res = await fetch('https://api.mcsrvstat.us/2/nansmp.net');
         const data = await res.json();
         if (data.online) {
             el.innerText = data.players.online;
