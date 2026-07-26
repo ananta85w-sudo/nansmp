@@ -4,8 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#00ffff" />
-  <meta name="description" content="NANSMP adalah server Minecraft Indonesia bertema Survival Economy untuk Java dan Bedrock." />
-  <title>NANSMP | Minecraft Survival Economy Indonesia</title>
+  <meta name="description" content="Official Store NANSMP! Beli Rank, Topup Money, dan Upgrade Skill eksklusif untuk server Minecraft Survival Economy NANSMP Indonesia." />
+  <title>NANSMP Store | Official Minecraft Server Store</title>
+  <link rel="canonical" href="https://store.nansmp.net/" />
 
   <link rel="icon" type="image/jpeg" href="https://i.imgur.com/8oTJsa1.jpeg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -91,7 +92,7 @@
       to { transform: translateX(40%); }
     }
 
-    a { color: inherit; }
+    a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
 
     .container {
@@ -134,7 +135,6 @@
       display: inline-flex;
       align-items: center;
       gap: 12px;
-      text-decoration: none;
       min-width: fit-content;
     }
 
@@ -173,7 +173,6 @@
     }
 
     .nav-links a {
-      text-decoration: none;
       color: var(--muted);
       font-size: 0.82rem;
       font-weight: 700;
@@ -201,7 +200,6 @@
       border: 0;
       cursor: pointer;
       user-select: none;
-      text-decoration: none;
       border-radius: 999px;
       padding: 14px 22px;
       font-size: 0.88rem;
@@ -266,8 +264,8 @@
       position: fixed;
       inset: 0;
       z-index: 1500;
-      background: rgba(0, 0, 0, 0.74);
-      backdrop-filter: blur(5px);
+      background: rgba(0, 0, 0, 0.78);
+      backdrop-filter: blur(8px);
       opacity: 0;
       pointer-events: none;
       transition: .3s var(--ease);
@@ -321,7 +319,6 @@
     .side-links a {
       padding: 15px 16px;
       border-radius: 18px;
-      text-decoration: none;
       background: rgba(255,255,255,.06);
       border: 1px solid var(--stroke);
       font-weight: 800;
@@ -402,9 +399,7 @@
       margin-bottom: 22px;
     }
 
-    .hero h1 span {
-      display: inline-block;
-    }
+    .hero h1 span { display: inline-block; }
 
     .hero-copy {
       max-width: 670px;
@@ -477,9 +472,7 @@
       opacity: .88;
     }
 
-    .server-card-content {
-      padding: 22px;
-    }
+    .server-card-content { padding: 22px; }
 
     .server-card-content h2 {
       font-family: 'Montserrat', sans-serif;
@@ -596,6 +589,116 @@
       font-size: .96rem;
     }
 
+    /* STORE SECTION UI */
+    .store-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .store-card {
+      border-radius: var(--radius-xl);
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: .3s var(--ease);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .store-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(0,255,255,.36);
+      box-shadow: 0 20px 40px rgba(0, 255, 255, 0.15);
+    }
+
+    .store-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 5px;
+      background: var(--cyan);
+    }
+
+    .store-card.rank::before { background: var(--gold); }
+    .store-card.money::before { background: var(--green); }
+    .store-card.skills::before { background: var(--cyan); }
+
+    .store-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.1);
+      margin-bottom: 20px;
+      font-size: 1.9rem;
+    }
+
+    .rank .store-icon { color: var(--gold); }
+    .money .store-icon { color: var(--green); }
+    .skills .store-icon { color: var(--cyan); }
+
+    .store-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+
+    .store-card p {
+      color: var(--muted);
+      font-size: .9rem;
+      margin-bottom: 24px;
+    }
+
+    /* MODAL POP-UP PLAYER NAME */
+    .player-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
+      width: min(440px, 92vw);
+      padding: 32px 28px;
+      border-radius: var(--radius-xl);
+      z-index: 2500;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s var(--ease);
+    }
+
+    .player-modal.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .player-modal h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.45rem;
+      margin-bottom: 8px;
+    }
+
+    .modal-input {
+      width: 100%;
+      padding: 15px 18px;
+      border-radius: 16px;
+      border: 1px solid var(--stroke-cyan);
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      font-family: 'Poppins', sans-serif;
+      transition: .25s var(--ease);
+    }
+
+    .modal-input:focus {
+      border-color: var(--cyan);
+      box-shadow: var(--shadow-cyan);
+    }
+
     .tutorial-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -701,10 +804,7 @@
       line-height: 1;
     }
 
-    .connection-list {
-      display: grid;
-      gap: 12px;
-    }
+    .connection-list { display: grid; gap: 12px; }
 
     .ip-row {
       display: flex;
@@ -716,7 +816,6 @@
       background: rgba(255,255,255,.055);
       border: 1px solid rgba(255,255,255,.1);
       transition: .25s var(--ease);
-      cursor: default;
     }
 
     .ip-row.copy-el { cursor: pointer; }
@@ -750,67 +849,6 @@
       margin-top: 16px;
     }
 
-    .store-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .store-card {
-      border-radius: var(--radius-xl);
-      padding: 30px;
-      position: relative;
-      overflow: hidden;
-      transition: .3s var(--ease);
-    }
-
-    .store-card:hover {
-      transform: translateY(-10px);
-      border-color: rgba(0,255,255,.36);
-    }
-
-    .store-card::before {
-      content: "";
-      position: absolute;
-      inset: 0 0 auto 0;
-      height: 5px;
-      background: var(--cyan);
-    }
-
-    .store-card.rank::before { background: var(--gold); }
-    .store-card.money::before { background: var(--green); }
-    .store-card.skills::before { background: var(--cyan); }
-
-    .store-icon {
-      width: 70px;
-      height: 70px;
-      border-radius: 24px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(255,255,255,.1);
-      margin-bottom: 20px;
-      font-size: 1.9rem;
-    }
-
-    .rank .store-icon { color: var(--gold); }
-    .money .store-icon { color: var(--green); }
-    .skills .store-icon { color: var(--cyan); }
-
-    .store-card h3 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.5rem;
-      margin-bottom: 8px;
-    }
-
-    .store-card p {
-      color: var(--muted);
-      font-size: .9rem;
-      min-height: 76px;
-      margin-bottom: 22px;
-    }
-
     .feature-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -840,10 +878,7 @@
       font-size: 1.08rem;
     }
 
-    .feature-card p {
-      color: var(--muted);
-      font-size: .87rem;
-    }
+    .feature-card p { color: var(--muted); font-size: .87rem; }
 
     .gallery-grid {
       display: grid;
@@ -860,9 +895,7 @@
       box-shadow: var(--shadow-card);
     }
 
-    .gallery-item:first-child {
-      grid-row: span 2;
-    }
+    .gallery-item:first-child { grid-row: span 2; }
 
     .gallery-item img {
       width: 100%;
@@ -871,9 +904,7 @@
       transition: .65s var(--ease);
     }
 
-    .gallery-item:hover img {
-      transform: scale(1.1);
-    }
+    .gallery-item:hover img { transform: scale(1.1); }
 
     .gallery-item::after {
       content: "";
@@ -967,7 +998,6 @@
     }
 
     .footer-links a {
-      text-decoration: none;
       color: var(--muted);
       font-size: .84rem;
       font-weight: 800;
@@ -1025,8 +1055,11 @@
   </style>
 </head>
 <body>
-  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
+  <!-- Overlay Mobile & Modal -->
+  <div class="overlay" id="overlay" onclick="closeAllModals()"></div>
+
+  <!-- Sidebar Mobile -->
   <aside class="sidebar" id="sidebar" aria-label="Menu Mobile">
     <div class="sidebar-head">
       <a href="#home" class="brand" onclick="toggleSidebar()">
@@ -1037,26 +1070,27 @@
     </div>
     <div class="side-links">
       <a href="#home" onclick="toggleSidebar()">🏠 Beranda</a>
-      <a href="#portal" onclick="toggleSidebar()">🌐 Cara Join</a>
       <a href="#store" onclick="toggleSidebar()">🛒 Official Store</a>
+      <a href="#portal" onclick="toggleSidebar()">🌐 Cara Join</a>
       <a href="#gallery" onclick="toggleSidebar()">🖼️ Gallery</a>
       <a href="https://whatsapp.com/channel/0029VaqnH97L7UVWBeMAyX2I" target="_blank" rel="noopener">💚 Saluran WhatsApp</a>
       <a href="https://discord.gg/4KPhCnvQyf" target="_blank" rel="noopener">💎 Join Discord</a>
     </div>
   </aside>
 
+  <!-- Topbar Navigasi -->
   <header class="topbar">
     <div class="container nav">
       <a href="#home" class="brand">
         <img src="https://i.imgur.com/wroGDtf.png" alt="Logo NANSMP" />
-        <span class="brand-name"><span class="accent">NAN</span>SMP <small>Survival Economy</small></span>
+        <span class="brand-name"><span class="accent">NAN</span>SMP <small>Official Store</small></span>
       </a>
 
       <nav class="nav-links" aria-label="Navigasi utama">
         <a href="#home">Beranda</a>
+        <a href="#store">Store Catalog</a>
         <a href="#portal">Cara Join</a>
-        <a href="#store">Store</a>
-        <a href="#features">Fitur</a>
+        <a href="#features">Fitur Server</a>
         <a href="#gallery">Gallery</a>
       </nav>
 
@@ -1068,19 +1102,20 @@
   </header>
 
   <main>
+    <!-- Hero Section -->
     <section class="hero" id="home">
       <div class="hero-bg"></div>
       <div class="container">
         <div class="hero-grid">
           <div class="hero-copy-block">
             <div class="badge-row">
-              <span class="badge"><i class="fa-solid fa-cube"></i> Minecraft Indonesia</span>
+              <span class="badge"><i class="fa-solid fa-store"></i> Official Store</span>
               <span class="badge"><i class="fa-solid fa-layer-group"></i> Java & Bedrock</span>
             </div>
 
-            <h1>SERVER <span>MINECRAFT</span> <span class="accent">NAN</span>SMP</h1>
+            <h1>STORE <span>MINECRAFT</span> <span class="accent">NAN</span>SMP</h1>
             <p class="hero-copy">
-              NanSMP adalah server Minecraft Indonesia bertema <b>Survival Economy</b> dengan gameplay kompetitif, komunitas aktif, dan fitur cross-platform untuk player Java maupun Bedrock.
+              Selamat datang di Official Store <b>NanSMP</b>. Beli Rank VIP, Topup Money Ekonomi, dan Peningkatan Skill eksklusif untuk karakter Minecraft milikmu.
             </p>
 
             <button class="ip-pill copy-text" data-copy="nansmp.net">
@@ -1091,10 +1126,9 @@
             </button>
 
             <div class="hero-actions">
-              <a href="#portal" class="btn btn-primary"><i class="fa-solid fa-play"></i> Main Sekarang</a>
-              <a href="#store" class="btn btn-gold"><i class="fa-solid fa-crown"></i> Buka Store</a>
+              <a href="#store" class="btn btn-gold"><i class="fa-solid fa-cart-shopping"></i> Belanja Sekarang</a>
+              <a href="#portal" class="btn btn-primary"><i class="fa-solid fa-play"></i> Cara Join Server</a>
               <a href="https://discord.gg/4KPhCnvQyf" target="_blank" rel="noopener" class="btn btn-dc"><i class="fa-brands fa-discord"></i> Discord</a>
-              <a href="https://whatsapp.com/channel/0029VaqnH97L7UVWBeMAyX2I" target="_blank" rel="noopener" class="btn btn-wa"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
             </div>
           </div>
 
@@ -1102,8 +1136,8 @@
             <div class="server-card-main">
               <img src="https://i.imgur.com/ZuF8S0e.jpeg" alt="Preview server NANSMP" />
               <div class="server-card-content">
-                <h2><span class="accent">NAN</span>SMP</h2>
-                <p>Join sekarang, bangun base, cari money, upgrade skill, dan jadilah player paling berpengaruh di economy server.</p>
+                <h2><span class="accent">NAN</span>SMP Store</h2>
+                <p>Pembelian diproses manual via WhatsApp oleh penjual dengan metode pembayaran yang fleksibel.</p>
                 <div class="mini-status">
                   <div class="mini-box"><strong id="playerStatus">0</strong><span>Online</span></div>
                   <div class="mini-box"><strong>1.21+</strong><span>Version</span></div>
@@ -1115,20 +1149,70 @@
         </div>
 
         <div class="stats-strip">
-          <div class="stat-card"><strong>JAVA</strong><span>Support PC</span></div>
-          <div class="stat-card"><strong>BEDROCK</strong><span>Support Mobile</span></div>
-          <div class="stat-card"><strong>ECONOMY</strong><span>Gameplay Utama</span></div>
-          <div class="stat-card"><strong>24/7</strong><span>Community Ready</span></div>
+          <div class="stat-card"><strong>PEMBELIAN</strong><span>Via WhatsApp</span></div>
+          <div class="stat-card"><strong>PAYMENT</strong><span>Sesuai Penjual</span></div>
+          <div class="stat-card"><strong>ECONOMY</strong><span>Survival Mode</span></div>
+          <div class="stat-card"><strong>SUPPORT</strong><span>05:00 - 21:00 WIB</span></div>
         </div>
       </div>
     </section>
 
+    <!-- OFFICIAL STORE SECTION -->
+    <section class="section" id="store">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Pilihan Kategori</div>
+          <h2 class="section-title">Official Store Catalog</h2>
+          <p class="section-subtitle">Pilih kategori di bawah ini untuk memulai order item atau rank impianmu.</p>
+        </div>
+
+        <div class="store-grid">
+          <!-- RANK PREMIUM -->
+          <article class="store-card rank glass">
+            <div>
+              <div class="store-icon"><i class="fa-solid fa-crown"></i></div>
+              <h3>Rank Premium</h3>
+              <p>Dapatkan badge keren, prefix istimewa, perk eksklusif, serta akses perintah rahasia di dalam server.</p>
+            </div>
+            <button onclick="openPlayerModal('rank')" class="btn btn-gold" style="width: 100%;">
+              <i class="fa-solid fa-cart-shopping"></i> Beli Rank
+            </button>
+          </article>
+
+          <!-- TOPUP MONEY -->
+          <article class="store-card money glass">
+            <div>
+              <div class="store-icon"><i class="fa-solid fa-wallet"></i></div>
+              <h3>Topup Money</h3>
+              <p>Tambah saldo mata uang ekonomi secara cepat untuk membeli item di Market dan bersaing dengan player lain.</p>
+            </div>
+            <button onclick="openPlayerModal('money')" class="btn btn-wa" style="width: 100%;">
+              <i class="fa-solid fa-coins"></i> Topup Money
+            </button>
+          </article>
+
+          <!-- UPGRADE SKILLS -->
+          <article class="store-card skills glass">
+            <div>
+              <div class="store-icon"><i class="fa-solid fa-shield-halved"></i></div>
+              <h3>Upgrade Skills</h3>
+              <p>Tingkatkan level skill dan kemampuan bertarung/mining karaktermu secara instan tanpa perlu grinding lama.</p>
+            </div>
+            <button onclick="openPlayerModal('skills')" class="btn btn-primary" style="width: 100%;">
+              <i class="fa-solid fa-bolt"></i> Beli Skill
+            </button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTAL & CARA JOIN -->
     <section class="section" id="portal">
       <div class="container">
         <div class="section-head">
-          <div class="section-kicker">Cara Bergabung</div>
+          <div class="section-kicker">Panduan Join</div>
           <h2 class="section-title">Masuk ke Server Dalam Hitungan Detik</h2>
-          <p class="section-subtitle">Pilih platform kamu, salin IP, masukkan port, lalu langsung join ke dunia Survival Economy NANSMP.</p>
+          <p class="section-subtitle">Pilih platform kamu, salin IP, masukkan port, lalu langsung join ke dunia NANSMP.</p>
         </div>
 
         <div class="tutorial-grid">
@@ -1166,7 +1250,7 @@
             </div>
 
             <div class="portal-actions">
-              <a href="minecraft://?addExternalServer=NanSMP|nansmp.net:19132" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Tambahkan</a>
+              <a href="minecraft://?addExternalServer=NanSMP|nansmp.net:19132" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Tambahkan Otomatis</a>
               <a href="https://discord.gg/4KPhCnvQyf" target="_blank" rel="noopener" class="btn btn-ghost"><i class="fa-brands fa-discord"></i> Bantuan Join</a>
             </div>
           </div>
@@ -1178,73 +1262,42 @@
       </div>
     </section>
 
-    <section class="section" id="store">
-      <div class="container">
-        <div class="section-head">
-          <div class="section-kicker">Official Store</div>
-          <h2 class="section-title">Upgrade Progress Kamu</h2>
-          <p class="section-subtitle">Beli rank, topup money, dan upgrade skill untuk mempercepat perjalananmu di dunia NANSMP.</p>
-        </div>
-
-        <div class="store-grid">
-          <article class="store-card rank glass">
-            <div class="store-icon"><i class="fa-solid fa-crown"></i></div>
-            <h3>Rank Premium</h3>
-            <p>Dapatkan badge keren, fitur eksklusif, dan akses benefit spesial untuk menunjang gameplay.</p>
-            <a href="login.html?to=rank" class="btn btn-gold"><i class="fa-solid fa-cart-shopping"></i> Beli Rank</a>
-          </article>
-
-          <article class="store-card money glass">
-            <div class="store-icon"><i class="fa-solid fa-wallet"></i></div>
-            <h3>Topup Money</h3>
-            <p>Tambah saldo ekonomi secara instan untuk kebutuhan trade, upgrade, dan progress server.</p>
-            <a href="login.html?to=money" class="btn btn-wa"><i class="fa-solid fa-coins"></i> Topup Money</a>
-          </article>
-
-          <article class="store-card skills glass">
-            <div class="store-icon"><i class="fa-solid fa-shield-halved"></i></div>
-            <h3>Upgrade Skills</h3>
-            <p>Perkuat karakter kamu dengan peningkatan skill agar lebih siap untuk grinding dan kompetisi.</p>
-            <a href="login.html?to=skills" class="btn btn-primary"><i class="fa-solid fa-bolt"></i> Beli Skill</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
+    <!-- FEATURES -->
     <section class="section" id="features">
       <div class="container">
         <div class="section-head">
           <div class="section-kicker">Server Features</div>
-          <h2 class="section-title">Kenapa Main di NANSMP?</h2>
-          <p class="section-subtitle">Dibuat untuk player yang suka survival, ekonomi, komunitas, dan progress jangka panjang.</p>
+          <h2 class="section-title">Keunggulan NANSMP</h2>
+          <p class="section-subtitle">Dibuat khusus untuk player yang menyukai petualangan survival, sistem ekonomi, dan komunitas yang ramah.</p>
         </div>
 
         <div class="feature-grid">
           <article class="feature-card glass">
             <i class="fa-solid fa-chart-line"></i>
             <h3>Survival Economy</h3>
-            <p>Sistem ekonomi yang cocok untuk jual beli, grinding, dan membangun progres server.</p>
+            <p>Sistem ekonomi yang seimbang, dilengkapi fitur toko/market untuk jual beli antar sesama pemain.</p>
           </article>
           <article class="feature-card glass">
             <i class="fa-solid fa-users"></i>
             <h3>Komunitas Aktif</h3>
-            <p>Gabung bersama player Indonesia lain melalui Discord dan WhatsApp official NANSMP.</p>
+            <p>Bergabunglah dengan ratusan pemain Indonesia lainnya di saluran Discord dan grup WhatsApp resmi kami.</p>
           </article>
           <article class="feature-card glass">
             <i class="fa-solid fa-gamepad"></i>
-            <h3>Cross Platform</h3>
-            <p>Support Java dan Bedrock, jadi bisa main dari PC maupun mobile dengan mudah.</p>
+            <h3>Cross-Platform</h3>
+            <p>Main bersama temanmu tanpa hambatan, baik dari perangkat Mobile (Bedrock/PE) maupun PC (Java).</p>
           </article>
         </div>
       </div>
     </section>
 
+    <!-- GALLERY -->
     <section class="section" id="gallery">
       <div class="container">
         <div class="section-head">
           <div class="section-kicker">Gallery</div>
-          <h2 class="section-title">Preview Dunia NANSMP</h2>
-          <p class="section-subtitle">Beberapa tampilan visual server untuk bikin landing page terlihat lebih hidup dan premium.</p>
+          <h2 class="section-title">Suasana Server NANSMP</h2>
+          <p class="section-subtitle">Beberapa gambaran dunia dan keindahan arsitektur yang dibangun oleh komunitas kami.</p>
         </div>
 
         <div class="gallery-grid">
@@ -1256,33 +1309,101 @@
     </section>
   </main>
 
+  <!-- FOOTER -->
   <footer>
     <div class="container">
       <div class="footer-logo">
         <img src="https://i.imgur.com/wroGDtf.png" alt="Logo NANSMP" />
         <span><span class="accent">NAN</span>SMP</span>
       </div>
-      <p class="footer-text">Server Minecraft Survival Economy Indonesia. Join, bangun progres, dan jadilah bagian dari komunitas NANSMP Network.</p>
+      <p class="footer-text">Official Store & Server Minecraft Survival Economy Indonesia. Dukung server kami agar terus berkembang dengan membeli produk resmi di store.nansmp.net!</p>
       <div class="footer-links">
-        <a href="syarat-ketentuan.html">Syarat & Ketentuan</a>
-        <a href="https://discord.gg/4KPhCnvQyf" target="_blank" rel="noopener">Discord</a>
-        <a href="https://whatsapp.com/channel/0029VaqnH97L7UVWBeMAyX2I" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://discord.gg/4KPhCnvQyf" target="_blank" rel="noopener">Discord Support</a>
+        <a href="https://whatsapp.com/channel/0029VaqnH97L7UVWBeMAyX2I" target="_blank" rel="noopener">WhatsApp Channel</a>
+        <a href="#store">Store Catalog</a>
         <a href="#portal">IP Server</a>
       </div>
       <p class="copyright">© 2024 - 2026 NANSMP Network. All Rights Reserved.</p>
     </div>
   </footer>
 
+  <!-- POP-UP MODAL INPUT NICKNAME MC -->
+  <div class="player-modal glass" id="playerModal">
+    <button class="close-btn" onclick="closeAllModals()" style="position: absolute; top: 18px; right: 18px; width:36px; height:36px;"><i class="fa-solid fa-xmark"></i></button>
+    <div style="text-align: center; margin-bottom: 20px;">
+      <div style="font-size: 2.5rem; color: var(--cyan); margin-bottom: 10px;"><i class="fa-solid fa-user-astronaut"></i></div>
+      <h3>Masukkan Nickname MC</h3>
+      <p style="color: var(--muted); font-size: 0.85rem;">Isi Username Minecraft Java / Bedrock milikmu untuk melanjutkan ke WhatsApp Penjual.</p>
+    </div>
+
+    <form onsubmit="submitPlayerName(event)">
+      <input type="hidden" id="selectedCategory" value="" />
+      <div style="margin-bottom: 22px;">
+        <input 
+          type="text" 
+          id="mcUsername" 
+          placeholder="Contoh: TabegGamerz" 
+          required 
+          class="modal-input"
+          autocomplete="off"
+        />
+      </div>
+      <button type="submit" class="btn btn-wa" style="width: 100%;">
+        <i class="fa-brands fa-whatsapp"></i> Lanjut Order via WA
+      </button>
+    </form>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
   <div class="toast" id="toast">Berhasil disalin</div>
 
   <script>
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
     const toast = document.getElementById('toast');
+    const playerModal = document.getElementById('playerModal');
+
+    // ISI NOMOR WHATSAPP PENJUAL DI SINI (Ganti 628xxxxxxxx)
+    const waAdminNumber = "6283119561009"; 
 
     function toggleSidebar() {
       sidebar.classList.toggle('active');
       overlay.classList.toggle('active');
+    }
+
+    function openPlayerModal(category) {
+      document.getElementById('selectedCategory').value = category;
+      overlay.classList.add('active');
+      playerModal.classList.add('active');
+      setTimeout(() => document.getElementById('mcUsername').focus(), 100);
+    }
+
+    function closeAllModals() {
+      sidebar.classList.remove('active');
+      overlay.classList.remove('active');
+      playerModal.classList.remove('active');
+    }
+
+    function submitPlayerName(event) {
+      event.preventDefault();
+      const username = document.getElementById('mcUsername').value.trim();
+      const category = document.getElementById('selectedCategory').value;
+
+      if (!username) return;
+
+      let categoryName = "Item/Rank";
+      if(category === 'rank') categoryName = "Rank Premium";
+      if(category === 'money') categoryName = "Topup Money";
+      if(category === 'skills') categoryName = "Upgrade Skills";
+
+      const message = `Halo Admin NANSMP, saya ingin membeli *${categoryName}*.\n\n` +
+                      `*Nickname MC:* ${username}\n` +
+                      `*Kategori:* ${categoryName}\n\n` +
+                      `Mohon info metode pembayaran yang tersedia dan total harganya, terima kasih!`;
+
+      const waUrl = `https://wa.me/${waAdminNumber}?text=${encodeURIComponent(message)}`;
+      window.open(waUrl, '_blank');
+      closeAllModals();
     }
 
     function showToast(message) {
