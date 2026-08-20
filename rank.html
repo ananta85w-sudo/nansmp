@@ -211,17 +211,23 @@ for(const [rankName, data] of Object.entries(rankData)){
         e.stopPropagation();
         const now = new Date();
         const text =
-`----------BELI / UPGRADE RANK-----------
-Nama Minecraft: ${playerName}
-Tanggal: ${now.toLocaleDateString('id-ID')}
-Waktu:
-- ${now.toLocaleTimeString('id-ID')} WIB
-- ${new Date(now.getTime()+3600000).toLocaleTimeString('id-ID')} WITA
-- ${new Date(now.getTime()+7200000).toLocaleTimeString('id-ID')} WIT
-Beli Rank: ${rankName}
-Harga: Rp. ${data.price.toLocaleString()}
-Sebelum lanjutt membeli silahkan baca syarat dan ketentuan terlebih dahulu https://store.nansmp.net/syarat-ketentuan
---------------------------------------------------------`;
+`*🛒 BELI / UPGRADE RANK*
+
+*👤 Nama Minecraft:* ${playerName}
+*📅 Tanggal:* ${now.toLocaleDateString('id-ID')}
+
+*⏰ Waktu:*
+• ${now.toLocaleTimeString('id-ID')} WIB
+• ${new Date(now.getTime()+3600000).toLocaleTimeString('id-ID')} WITA
+• ${new Date(now.getTime()+7200000).toLocaleTimeString('id-ID')} WIT
+
+*🏆 Beli Rank:* ${rankName}
+*💰 Harga:* Rp. ${data.price.toLocaleString()}
+
+📜 *Syarat & Ketentuan*
+
+Sebelum lanjut membeli, silakan baca syarat dan ketentuan terlebih dahulu:
+https://store.nansmp.net/syarat-ketentuan`;
 
         window.open(`https://wa.me/6287780959219?text=${encodeURIComponent(text)}`,'_blank');
     };
