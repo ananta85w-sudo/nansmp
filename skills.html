@@ -209,13 +209,24 @@ buyBtn.addEventListener('click', ()=>{
         + `${(now.getHours()+1).toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')} WITA, `
         + `${(now.getHours()+2).toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')} WIT`;
 
-    const text = `---------------TOPUP SKILLS----------------
-Nama Minecraft: ${playerName}
-Tanggal/Tahun: ${dateStr}
-Skill: ${skill}
-Topup: ${level} Level
-Harga: Rp. ${rp.toLocaleString()}
---------------------------------------------------------`;
+    const text = `*⚡ TOPUP SKILLS*
+
+*👤 Nama Minecraft:* ${playerName}
+*📅 Tanggal:* ${now.toLocaleDateString('id-ID')}
+
+*⏰ Waktu:*
+• ${now.toLocaleTimeString('id-ID')} WIB
+• ${new Date(now.getTime()+3600000).toLocaleTimeString('id-ID')} WITA
+• ${new Date(now.getTime()+7200000).toLocaleTimeString('id-ID')} WIT
+
+*⚔️ Skill:* ${skill}
+*📈 Topup:* ${level} Level
+*💳 Harga:* Rp. ${rp.toLocaleString()}
+
+📜 *Syarat & Ketentuan*
+
+Sebelum lanjut membeli, silakan baca syarat dan ketentuan terlebih dahulu:
+https://store.nansmp.net/syarat-ketentuan`;
 
     const waNumber = '6285792819204';
     window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`, '_blank');
