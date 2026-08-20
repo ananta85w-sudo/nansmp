@@ -88,12 +88,23 @@ document.getElementById('buy-btn').addEventListener('click',()=>{
     let wit = pad(now.getHours()+2)+':'+pad(now.getMinutes())+' WIT';
     let dateStr = `${pad(now.getDate())}/${now.getMonth()+1}/${now.getFullYear()}, ${day}, ${wib}, ${wita}, ${wit}`;
 
-    let msg = `---------------TOPUP MONEY-----------------
-Nama Minecraft: ${playerName}
-Tanggal/Tahun: ${dateStr}
-Jumlah money: ${money}
-Harga: Rp. ${rupiahInput.value}
---------------------------------------------------------`;
+    let msg = `*💰 TOPUP MONEY*
+
+*👤 Nama Minecraft:* ${playerName}
+*📅 Tanggal:* ${now.toLocaleDateString('id-ID')}
+
+*⏰ Waktu:*
+• ${now.toLocaleTimeString('id-ID')} WIB
+• ${new Date(now.getTime()+3600000).toLocaleTimeString('id-ID')} WITA
+• ${new Date(now.getTime()+7200000).toLocaleTimeString('id-ID')} WIT
+
+*💵 Jumlah Money:* ${money}
+*💳 Harga:* Rp. ${rupiahInput.value}
+
+📜 *Syarat & Ketentuan*
+
+Sebelum lanjut membeli, silakan baca syarat dan ketentuan terlebih dahulu:
+https://store.nansmp.net/syarat-ketentuan`;
 
     let waLink = 'https://wa.me/+62881038098059?text=' + encodeURIComponent(msg);
     window.open(waLink,'_blank');
