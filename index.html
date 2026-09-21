@@ -1353,22 +1353,35 @@
     });
 
     async function updateStatus() {
-      const el = document.getElementById('playerStatus');
-      if (!el) return;
+  const el = document.getElementById('playerStatus');
+  if (!el) return;
 
-      try {
-        const res = await fetch('https://api.mcsrvstat.us/2/nansmp.net', { cache: 'no-store' });
-        const data = await res.json();
+  try {
+    // Menggunakan API mcstatus.io untuk Bedrock/Java
+    const res = await fetch('https://api.mcstatus.io/v2/status/bedrock/nansmp.net:19132', { 
+      cache: 'no-store' 
+    });
+    const data = await res.json();
 
-        if (data.online && data.players) {
-          el.textContent = data.players.online ?? 0;
-        } else {
-          el.innerHTML = '<span style="color:#ff4d6d;font-size:.9rem">OFF</span>';
-        }
-      } catch (error) {
+    if (data && data.online) {
+      el.textContent = data.players.online ?? 0;
+    } else {
+      // Fallback ke status Java jika Bedrock tidak merespon
+      const resJava = await fetch('https://api.mcstatus.io/v2/status/java/nansmp.net', { 
+        cache: 'no-store' 
+      });
+      const dataJava = await resJava.json();
+      
+      if (dataJava && dataJava.online) {
+        el.textContent = dataJava.players.online ?? 0;
+      } else {
         el.innerHTML = '<span style="color:#ff4d6d;font-size:.9rem">OFF</span>';
       }
     }
+  } catch (error) {
+    el.innerHTML = '<span style="color:#ff4d6d;font-size:.9rem">OFF</span>';
+  }
+}
 
     updateStatus();
     setInterval(updateStatus, 15000);
