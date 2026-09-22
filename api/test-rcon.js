@@ -1,48 +1,56 @@
 import { Rcon } from 'rcon-client';
 
 export default async function handler(req, res) {
+  // Atur header agar output berupa JSON yang rapi
+  res.setHeader('Content-Type', 'application/json');
+
+  const host = process.env.RCON_HOST;
+  const port = parseInt(process.env.RCON_PORT || '25575', 10);
+  const password = process.env.RCON_PASSWORD;
+
+  // 1. Cek ketersediaan Environment Variables
+  if (!host || !password) {
+    return res.status(200).json({
+      status: 'GAGAL',
+      message: 'Environment Variable RCON_HOST atau RCON_PASSWORD belum diisi di Settings Vercel!'
+    });
+  }
+
   let rcon = null;
 
   try {
-    const host = process.env.RCON_HOST;
-    const port = parseInt(process.env.RCON_PORT || '25575', 10);
-    const password = process.env.RCON_PASSWORD;
-
-    // Cek apakah Environment Variables sudah terisi
-    if (!host || !password) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'Environment Variables (RCON_HOST / RCON_PASSWORD) belum diisi di Vercel!'
-      });
-    }
-
-    // Sambungkan ke RCON dengan timeout 4 detik
-    rcon = await Rcon.connect({
+    // 2. Coba koneksi ke server Minecraft dengan timeout 5 detik
+    rcon = new Rcon({
       host: host,
       port: port,
       password: password,
-      timeout: 4000
+      timeout: 5000
     });
 
+    await rcon.connect();
     const response = await rcon.send('list');
     await rcon.end();
 
     return res.status(200).json({
       status: 'SUKSES',
-      message: 'RCON Berhasil terhubung ke server NanSMP!',
+      message: 'RCON terhubung ke server NanSMP!',
       serverResponse: response
     });
 
   } catch (error) {
     if (rcon) {
-      try { await rcon.end(); } catch (e) {}
+      try {
+        await rcon.end();
+      } catch (e) {
+        // Abaikan error saat menutup koneksi
+      }
     }
 
     return res.status(200).json({
       status: 'GAGAL',
-      errorName: error.name,
-      errorMessage: error.message,
-      hint: 'Cek apakah IP/Port RCON di server.properties sudah benar & server sedang online.'
+      errorName: error.name || 'Error',
+      errorMessage: error.message || 'Gagal terhubung ke RCON',
+      detail: 'Pastikan port RCON di server.properties sudah sesuai dan IP/Port tidak diblokir firewall hosting.'
     });
   }
 }
