@@ -1,0 +1,9 @@
+{
+  "name": "nansmp-store",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "rcon-client": "^1.2.0"
+  }
+}
