@@ -68,25 +68,37 @@ const loginBtn = document.getElementById('login-btn');
 const urlParams = new URLSearchParams(window.location.search);
 let redirectPage = urlParams.get('to') || 'rank';
 
-// Jika ada player tersimpan, tampilkan
-if(localStorage.getItem('player')) playerNameInput.value = localStorage.getItem('player');
+// Jika ada player tersimpan, tampilkan tanpa prefix titik
+if(localStorage.getItem('player')){
+    let savedPlayer = localStorage.getItem('player');
+    if(savedPlayer.startsWith('.')){
+        platformSelect.value = 'bedrock';
+        playerNameInput.value = savedPlayer.substring(1); // Hapus titik di tampilan input
+    } else {
+        platformSelect.value = 'java';
+        playerNameInput.value = savedPlayer;
+    }
+}
 
-// Fungsi tampilkan titik untuk Bedrock
+// Fungsi tampilkan indikator titik untuk Bedrock
 function updateDot(){
-    dot.style.display = (platformSelect.value==='bedrock') ? 'inline-block' : 'none';
+    dot.style.display = (platformSelect.value === 'bedrock') ? 'inline-block' : 'none';
 }
 platformSelect.addEventListener('change', updateDot);
 updateDot();
 
 // Tombol login
 loginBtn.addEventListener('click', ()=>{
-    const name = playerNameInput.value.trim();
+    let name = playerNameInput.value.trim();
     if(!name){ alert('Masukkan nama Minecraft!'); return; }
 
-    // Tambahkan titik + spasi untuk Bedrock
-    const displayName = (platformSelect.value==='bedrock') ? '. ' + name : name;
+    // Jika user memasukkan titik secara manual, bersihkan dulu
+    if(name.startsWith('.')) name = name.substring(1).trim();
 
-    // Simpan nama player di localStorage agar tetap ada
+    // Tambahkan prefix '.' tanpa spasi untuk Bedrock (standar Geyser/Floodgate)
+    const displayName = (platformSelect.value === 'bedrock') ? '.' + name : name;
+
+    // Simpan nama player di localStorage
     localStorage.setItem('player', displayName);
 
     // Redirect ke halaman sesuai parameter 'to'
