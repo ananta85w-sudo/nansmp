@@ -123,73 +123,6 @@ footer{
 footer a{color:#00bfff;text-decoration:none}
 footer a:hover{text-decoration:underline}
 
-/* Styling Modal Pembayaran */
-.modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(5px);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    padding: 20px;
-}
-.modal-card {
-    background: #181818;
-    border-radius: 16px;
-    padding: 25px;
-    max-width: 420px;
-    width: 100%;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-}
-.modal-card h2 {
-    font-family: 'Minecraft', monospace;
-    font-size: 24px;
-    margin-top: 0;
-    color: #00bfff;
-}
-.qris-box img {
-    width: 220px;
-    height: 220px;
-    border-radius: 12px;
-    margin: 15px 0;
-    border: 2px solid #00bfff;
-}
-.pay-details {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 12px;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    text-align: left;
-    font-size: 14px;
-}
-.pay-details div {
-    margin: 6px 0;
-}
-.important-note {
-    font-size: 12px;
-    color: #ffcc00;
-    background: rgba(255, 204, 0, 0.1);
-    padding: 10px;
-    border-radius: 8px;
-    border-left: 3px solid #ffcc00;
-    margin-bottom: 15px;
-    text-align: left;
-}
-.close-btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 10px;
-    background: #ff4d4d;
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-    width: 100%;
-}
-
 /* Warna rank */
 .rank-Vip .name{color:#00ffff}
 .rank-Vipplus .name{color:#00ff00}
@@ -219,30 +152,6 @@ footer a:hover{text-decoration:underline}
 <div class="rank-container" id="rank-container"></div>
 </main>
 
-<!-- Modal Pop-up QRIS Pembayaran DANA -->
-<div class="modal-overlay" id="pay-modal">
-    <div class="modal-card">
-        <h2>PEMBAYARAN DANA</h2>
-        
-        <!-- Ganti URL gambar di bawah dengan Link Gambar QRIS DANA milikmu -->
-        <div class="qris-box">
-            <img src="https://i.imgur.com/ZskENbp.jpeg" alt="QRIS DANA" id="qris-img">
-        </div>
-
-        <div class="pay-details">
-            <div><b>Player:</b> <span id="modal-player" style="color:#00ff00"></span></div>
-            <div><b>Rank Dibeli:</b> <span id="modal-rank" style="color:#00bfff"></span></div>
-            <div><b>Total Bayar:</b> <span id="modal-price" style="color:#ffcc00; font-size:16px; font-weight:bold;"></span></div>
-        </div>
-
-        <div class="important-note">
-            ⚠️ <b>PENTING:</b> Saat melakukan transfer DANA, tulis username Minecraft kamu (<b><span id="modal-player-note"></span></b>) pada <u>CATATAN/PESAN TRANSFER</u> DANA agar sistem otomatis memberikan rank!
-        </div>
-
-        <button class="close-btn" onclick="closeModal()">TUTUP</button>
-    </div>
-</div>
-
 <footer>
 <p>© NanSMP</p>
 <p>
@@ -256,13 +165,13 @@ footer a:hover{text-decoration:underline}
 
 <script>
 const params = new URLSearchParams(window.location.search);
-const playerName = params.get('player') || localStorage.getItem('player') || 'Player123';
+const playerName = params.get('player') || 'Player123';
 document.getElementById('player-name').textContent = playerName;
 
 const rankData = {
  "Vip":{price:15000,features:["Anvil","Heal","Feed","Nick","Repair","Blocklimit 14k","Claim 6x","Sethome 6x"]},
  "Vip+":{price:30000,features:["Anvil","Heal","Feed","Nick","Repair","Fly","Blocklimit 35k","Claim 9x","Sethome 9x"]},
- "Mvp":{price:50000,features:["Anvil","Heal","Feed","Nick","Repair","Fly","Tp","Blocklimit 50k","Claim 12x","Sethome 12x"]},
+ "Mvp":{price:50000,features:["Anvil","Heal","Feed","Nick","Repair",,"Fly","Tp","Blocklimit 50k","Claim 12x","Sethome 12x"]},
  "Mvp+":{price:80000,features:["Anvil","Heal","Feed","Nick","Repair","Fly","Tp","God","Time set","Blocklimit 75k","Claim 15x","Sethome 15x"]},
  "Yongsun":{price:120000,features:["Anvil","Heal","Feed","Nick","Repair","Fly","Tp","God","Time set","Vanish","Blocklimit 100k","Claim 20x","Sethome 20x"]},
  "Yongsun+":{price:170000,features:["Anvil","Heal","Feed","Nick","Repair","Fly","Tp","God","Time set","Vanish","Invsee","Blocklimit 125k","Claim 25x","Sethome 25x"]},
@@ -279,14 +188,14 @@ for(const [rankName, data] of Object.entries(rankData)){
     box.innerHTML=`
     <div class="rank-header">
         <span class="name">${rankName}</span>
-        <span class="price">Rp ${data.price.toLocaleString('id-ID')}</span>
+        <span class="price">Rp ${data.price.toLocaleString()}</span>
     </div>
     <div class="rank-footer">Klik untuk melihat fitur</div>
     <div class="rank-features">
         <ul>${data.features.map(f=>`<li>${f}</li>`).join('')}</ul>
         <div class="buy-row">
             <button>BELI SEKARANG!</button>
-            <b>Rp ${data.price.toLocaleString('id-ID')}</b>
+            <b>Rp ${data.price.toLocaleString()}</b>
         </div>
     </div>`;
     container.appendChild(box);
@@ -298,23 +207,30 @@ for(const [rankName, data] of Object.entries(rankData)){
         features.style.display = features.style.display==='block'?'none':'block';
     });
 
-    // Fungsi Klik Beli (Membuka Modal QRIS Pembayaran)
     box.querySelector('button').onclick = (e)=>{
         e.stopPropagation();
-        openModal(rankName, data.price);
+        const now = new Date();
+        const text = `*🛒 BELI / UPGRADE RANK*
+
+*👤 Nama Minecraft:* ${playerName}
+*📅 Tanggal:* ${now.toLocaleDateString('id-ID')}
+
+*⏰ Waktu:*
+• ${now.toLocaleTimeString('id-ID')} WIB
+• ${new Date(now.getTime()+3600000).toLocaleTimeString('id-ID')} WITA
+• ${new Date(now.getTime()+7200000).toLocaleTimeString('id-ID')} WIT
+
+*🏆 Beli Rank:* ${rankName}
+*💰 Harga:* Rp. ${data.price.toLocaleString()}
+
+📜 *Syarat & Ketentuan*
+
+Sebelum lanjut membeli, silakan baca syarat dan ketentuan terlebih dahulu:
+https://store.nansmp.net/syarat-ketentuan`;
+
+
+        window.open(`https://wa.me/6287780959219?text=${encodeURIComponent(text)}`,'_blank');
     };
-}
-
-function openModal(rankName, price) {
-    document.getElementById('modal-player').textContent = playerName;
-    document.getElementById('modal-player-note').textContent = playerName;
-    document.getElementById('modal-rank').textContent = rankName;
-    document.getElementById('modal-price').textContent = 'Rp ' + price.toLocaleString('id-ID');
-    document.getElementById('pay-modal').style.display = 'flex';
-}
-
-function closeModal() {
-    document.getElementById('pay-modal').style.display = 'none';
 }
 </script>
 </body>
